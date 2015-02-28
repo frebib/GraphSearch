@@ -1,33 +1,38 @@
 package search;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
-public class Node<A>{
-	private  A contents;
+public class Node<A> {
+	private A contents;
 	private final Collection<Node<A>> successors;
-	
-	public Node(A contents){
+
+	public Node(A contents) {
 		this.contents = contents;
 		this.successors = new LinkedHashSet<Node<A>>();
 	}
-	
-	public Collection<Node<A>> successors(){
-		return successors;
-	}
-	public void addSuccessor(Node<A> s){
+
+	public void addSuccessor(Node<A> s) {
 		successors.add(s);
 	}
-	
-	public boolean contentsEquals (A c) {
-		return contents.equals(c);
+
+	public Collection<Node<A>> getSuccessors() {
+		return successors;
 	}
-	
-	public A contents(){
+
+	public A getContents() {
 		return contents;
 	}
-	
-	public String toString(){
-		return contents().toString();
+
+	public float getHeuristic(Node<A> goal) {
+		throw new NotImplementedException();
+		// TODO: Add Heuristic function between co-ordinates using Point.distance()
+	}
+
+	@Override
+	public String toString() {
+		return contents.toString();
 	}
 }

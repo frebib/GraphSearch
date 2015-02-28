@@ -1,18 +1,18 @@
 package search;
 
 public class Coordinate {
-	public int x,y;
-	
+	public int x, y;
+
 	Coordinate(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return "(" + x + ", " + y + ")";
 	}
-	
+
 	// Both hasCode and equals must be overridden for the hashtablemap to work correctly
 	@Override
 	public int hashCode() {
@@ -22,10 +22,10 @@ public class Coordinate {
 		result = prime * result + x;
 		result = prime * result + y;
 		return result;
-		*/
+		 */
 		return x + y;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
