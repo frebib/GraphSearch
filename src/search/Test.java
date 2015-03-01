@@ -4,20 +4,18 @@ import maybe.Predicate;
 import search.datastructures.SearchQueue;
 import search.datastructures.SearchStack;
 
-import java.awt.Point;
-
 public class Test {
 
 	public static void main(String[] args) {
 		// All testing done on things that are not nicks graph
 
-		Node<Point> n1 = new Node<Point>(new Point(0, 0));
-		Node<Point> n2 = new Node<Point>(new Point(1, 1));
-		Node<Point> n3 = new Node<Point>(new Point(1, 2));
-		Node<Point> n4 = new Node<Point>(new Point(2, 3));
-		Node<Point> n5 = new Node<Point>(new Point(2, 4));
-		Node<Point> n6 = new Node<Point>(new Point(2, 6));
-		Node<Point> n7 = new Node<Point>(new Point(2, 7));
+		Node<Coordinate> n1 = new Node<Coordinate>(new Coordinate(0, 0));
+		Node<Coordinate> n2 = new Node<Coordinate>(new Coordinate(1, 1));
+		Node<Coordinate> n3 = new Node<Coordinate>(new Coordinate(1, 2));
+		Node<Coordinate> n4 = new Node<Coordinate>(new Coordinate(2, 3));
+		Node<Coordinate> n5 = new Node<Coordinate>(new Coordinate(2, 4));
+		Node<Coordinate> n6 = new Node<Coordinate>(new Coordinate(2, 6));
+		Node<Coordinate> n7 = new Node<Coordinate>(new Coordinate(2, 7));
 
 		n3.addSuccessor(n6);
 		n3.addSuccessor(n7);
@@ -28,11 +26,12 @@ public class Test {
 		n1.addSuccessor(n2);
 		n1.addSuccessor(n3);
 
-		Predicate<Point> p1 = p -> p.y == 4;
+		Predicate<Coordinate> p1 = p -> p.y == 4;
 
-		System.out.println(Search.findNodeFrom(n1, p1, new SearchQueue<Node<Point>>()));
+		System.out.println(Search.findNodeFrom(n1, p1, new SearchQueue<Node<Coordinate>>()));
 		System.out.println(BreadthFirst.findNodeFrom(n1, p1) + "\n");
-		System.out.println(Search.findNodeFrom(n1, p1, new SearchStack<Node<Point>>()));
+		System.out.println(Search.findNodeFrom(n1, p1, new SearchStack<Node<Coordinate>>()));
 		System.out.println(DepthFirst.findNodeFrom(n1, p1));
+		System.out.println(Search.findPathFrom(n1, p1, new SearchStack<Node<Coordinate>>()).fromMaybe());
 	}
 }
