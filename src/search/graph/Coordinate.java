@@ -1,4 +1,4 @@
-package search;
+package search.graph;
 
 public class Coordinate {
 	public int x, y;

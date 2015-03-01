@@ -8,6 +8,7 @@ import maybe.Maybe;
 import maybe.Nothing;
 import maybe.Predicate;
 import search.datastructures.DataStructure;
+import search.graph.Node;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -15,7 +16,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class Search {
-
 	public static <A, B extends DataStructure<Node<A>>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Predicate<A> p, B frontier) {
 		Map<Node<A>, Node<A>> visited = new LinkedHashMap<Node<A>, Node<A>>();
 		Node<A> node = null;

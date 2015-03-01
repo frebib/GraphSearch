@@ -1,4 +1,7 @@
-package search;
+package search.graph;
+
+import search.BreadthFirst;
+import search.DepthFirst;
 
 import maybe.Predicate;
 

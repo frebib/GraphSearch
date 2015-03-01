@@ -1,4 +1,4 @@
-package search;
+package search.graph;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

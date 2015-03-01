@@ -1,5 +1,7 @@
 package search;
 
+import search.graph.Node;
+
 import maybe.Just;
 import maybe.Maybe;
 import maybe.Nothing;

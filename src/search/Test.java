@@ -1,5 +1,8 @@
 package search;
 
+import search.graph.Coordinate;
+import search.graph.Node;
+
 import maybe.Predicate;
 import search.datastructures.SearchQueue;
 import search.datastructures.SearchStack;
