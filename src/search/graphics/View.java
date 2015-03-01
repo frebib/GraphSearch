@@ -14,6 +14,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class View extends JPanel implements Observer {
+	private static final long serialVersionUID = 1L;
+
 	private Traverser traverser;
 
 	public View(Traverser traverser) {
