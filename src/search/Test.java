@@ -1,11 +1,10 @@
 package search;
 
-import search.graph.Coordinate;
-import search.graph.Node;
-
 import maybe.Predicate;
 import search.datastructures.SearchQueue;
 import search.datastructures.SearchStack;
+import search.graph.Coordinate;
+import search.graph.Node;
 
 public class Test {
 
@@ -30,11 +29,12 @@ public class Test {
 		n1.addSuccessor(n3);
 
 		Predicate<Coordinate> p1 = p -> p.y == 4;
+		Predicate<Coordinate> p2 = p -> p.y == 0;
 
-		System.out.println(Search.findNodeFrom(n1, p1, new SearchQueue<Node<Coordinate>>()));
+		System.out.println(Search.findNodeFrom(n1, p2, new SearchQueue<Node<Coordinate>>()));
 		System.out.println(BreadthFirst.findNodeFrom(n1, p1) + "\n");
 		System.out.println(Search.findNodeFrom(n1, p1, new SearchStack<Node<Coordinate>>()));
 		System.out.println(DepthFirst.findNodeFrom(n1, p1));
-		System.out.println(Search.findPathFrom(n1, p1, new SearchStack<Node<Coordinate>>()).fromMaybe());
+		System.out.println(Search.findPathFrom(n1, p2, new SearchStack<Node<Coordinate>>()));
 	}
 }
