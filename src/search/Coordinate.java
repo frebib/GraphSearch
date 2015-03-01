@@ -3,7 +3,7 @@ package search;
 public class Coordinate {
 	public int x, y;
 
-	Coordinate(int x, int y) {
+	public Coordinate(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -13,17 +13,9 @@ public class Coordinate {
 		return "(" + x + ", " + y + ")";
 	}
 
-	// Both hasCode and equals must be overridden for the hashtablemap to work correctly
 	@Override
 	public int hashCode() {
-		/*
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
-		return result;
-		 */
-		return x + y;
+		return x + y << 16;
 	}
 
 	@Override

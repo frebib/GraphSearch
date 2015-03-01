@@ -8,6 +8,7 @@ public class Cons<E> implements IList<E> {
 
 	private final E head;
 	private final IList<E> tail; // Reference to another list
+
 	// (not a list itself).
 
 	public Cons(E head, IList<E> tail) {
@@ -33,7 +34,7 @@ public class Cons<E> implements IList<E> {
 
 	@Override
 	public String toString() {
-		return "Cons(" + head + "," + tail.toString() + ")";
+		return "Cons(" + head + ", " + tail.toString() + ")";
 	}
 
 	@Override

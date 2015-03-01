@@ -26,6 +26,10 @@ public class Node<A> {
 		return contents;
 	}
 
+	public boolean contentsEquals(A c) {
+		return contents.equals(c);
+	}
+
 	public float getHeuristic(Node<A> goal) {
 		throw new NotImplementedException();
 		// TODO: Add Heuristic function between co-ordinates using Point.distance()
@@ -33,6 +37,6 @@ public class Node<A> {
 
 	@Override
 	public String toString() {
-		return contents.toString();
+		return "Node" + contents.toString();
 	}
 }
