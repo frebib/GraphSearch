@@ -8,39 +8,24 @@ import search.graph.Node;
 
 public class DepthFirst {
 
+	/**
+	 * Finds a Node in a {@link Graph} using Depth First Search
+	 * 
+	 * @param start The {@link Node} to start searching from
+	 * @param p A {@link Predicate} to check each node against determining the target {@link Node}
+	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
+	 */
 	public static <A> Maybe<Node<A>> findNodeFrom(Node<A> start, Predicate<A> p) {
 		return Search.findNodeFrom(start, p, new SearchStack<Node<A>>());
-		/*
-			// Use an array dequeue in order to act like a stack (java documentation states that this should be used in preference to a stack)
-			// This will be the frontier that holds all nodes that are waiting to be expanded
-			ArrayDeque<Node<A>> frontier = new ArrayDeque<Node<A>>();
-			// Create a set to store visited nodes
-			Set<Node<A>> vstd = new HashSet<Node<A>>();
-			// Create a node to represent the node currently being expanded
-			Node<A> node;
-			// Push the starting node to the frontier
-			frontier.push(start);
-			// While there are still nodes to be expanded
-			while (!frontier.isEmpty()) {
-				// Remove the node on the top of the frontier stack and store it as the node to be expanded
-				node = frontier.pop();
-				// Check that the node hasn't already been expanded
-				if (!vstd.contains(node))
-					// If the node is the node being searched for
-					if (p.holds(node.getContents()))
-						// Return "just" the node
-						return new Just<Node<A>>(node);
-					else {
-						vstd.add(node);
-						// If the node wasn't the one being searched for add it to the visited set and push all of it's successors to the stack
-						for (Node<A> suc : node.getSuccessors())
-							frontier.push(suc);
-					}
-			}
-			// If none of the connected nodes satisfy the predicate return "nothing"
-			return new Nothing<Node<A>>();
-		*/
 	}
+
+	/**
+	 * Finds a path between connected nodes using Depth First Search
+	 * 
+	 * @param start The {@link Node} to start path-finding from
+	 * @param p A {@link Predicate} to check each node against determining the destination {@link Node}
+	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
+	 */
 	public static <A> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Predicate<A> p) {
 		return Search.findPathFrom(start, p, new SearchStack<Node<A>>());
 	}

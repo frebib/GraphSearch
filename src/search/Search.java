@@ -10,12 +10,49 @@ import maybe.Predicate;
 import search.datastructures.DataStructure;
 import search.graph.Node;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class Search {
+
+	/**
+	 * Finds a Node in a {@link Graph}
+	 * 
+	 * @param start The {@link Node} to start searching from
+	 * @param p A {@link Predicate} to check each node against determining the target {@link Node}
+	 * @param frontier A {@link Collection} to store the frontier set in
+	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
+	 */
+	public static <A, B extends DataStructure<Node<A>>> Maybe<Node<A>> findNodeFrom(Node<A> start, Predicate<A> p, B frontier) {
+		Set<Node<A>> visited = new HashSet<Node<A>>();
+		Node<A> node;
+
+		frontier.add(start);						// Adds the node to the frontier in the manner specified by the data structure
+		while (!frontier.isEmpty()) {
+			node = frontier.getHead();				// Get and remove the first element in the manner specified by the data structure
+			if (p.holds(node.getContents()))
+				return new Just<Node<A>>(node);		// Return found goal Node
+			else
+				for (Node<A> suc : node.getSuccessors())
+					if (!visited.contains(suc)) {
+						frontier.add(suc);			// Add all successors to the frontier set so they can be searched
+						visited.add(suc);			// on a later iteration of this while loop
+					}
+		}
+		return new Nothing<>();
+	}
+
+	/**
+	 * Finds a path between connected nodes
+	 * 
+	 * @param start The {@link Node} to start path-finding from
+	 * @param p A {@link Predicate} to check each node against determining the destination {@link Node}
+	 * @param frontier A {@link Collection} to store the frontier set in
+	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
+	 */
 	public static <A, B extends DataStructure<Node<A>>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Predicate<A> p, B frontier) {
 		Map<Node<A>, Node<A>> visited = new LinkedHashMap<Node<A>, Node<A>>();
 		Node<A> node = null;
@@ -44,24 +81,6 @@ public class Search {
 					if (!visited.containsKey(suc)) {
 						frontier.add(suc);
 						visited.put(suc, node);
-					}
-		}
-		return new Nothing<>();
-	}
-	public static <A, B extends DataStructure<Node<A>>> Maybe<Node<A>> findNodeFrom(Node<A> start, Predicate<A> p, B frontier) {
-		Set<Node<A>> visited = new HashSet<Node<A>>();
-		Node<A> node;
-
-		frontier.add(start);						// Adds the node to the frontier in the manner specified by the data structure
-		while (!frontier.isEmpty()) {
-			node = frontier.getHead();				// Get and remove the first element in the manner specified by the data structure
-			if (p.holds(node.getContents()))
-				return new Just<Node<A>>(node);		// Return found goal Node
-			else
-				for (Node<A> suc : node.getSuccessors())
-					if (!visited.contains(suc)) {
-						frontier.add(suc);			// Add all successors to the frontier set so they can be searched
-						visited.add(suc);			// on a later iteration of this while loop
 					}
 		}
 		return new Nothing<>();
