@@ -35,6 +35,7 @@ public class Test {
 		System.out.println(BreadthFirst.findNodeFrom(n1, p1) + "\n");
 		System.out.println(Search.findNodeFrom(n1, p1, new SearchStack<Node<Coordinate>>()));
 		System.out.println(DepthFirst.findNodeFrom(n1, p1));
+		System.out.println(Search.findPathFrom(n1, p1, new SearchStack<Node<Coordinate>>()));
 		System.out.println(Search.findPathFrom(n1, p2, new SearchStack<Node<Coordinate>>()));
 	}
 }
