@@ -2,6 +2,7 @@
 .classpath
 .project
 bin/
+doc/
 
 # Misc
 *.pdf
