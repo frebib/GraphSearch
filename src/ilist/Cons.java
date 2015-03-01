@@ -9,8 +9,6 @@ public class Cons<E> implements IList<E> {
 	private final E head;
 	private final IList<E> tail; // Reference to another list
 
-	// (not a list itself).
-
 	public Cons(E head, IList<E> tail) {
 		assert (tail != null); // Tail should NOT be null. Use Nil instead.
 		// See
@@ -66,9 +64,6 @@ public class Cons<E> implements IList<E> {
 
 	@Override
 	public E get(int i) {
-		if (i == 0)
-			return head;
-		else
-			return tail.get(i - 1);
+		return (i == 0 ? head : tail.get(i - 1));
 	}
 }
