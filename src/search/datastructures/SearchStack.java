@@ -4,9 +4,6 @@ import java.util.ArrayDeque;
 
 public class SearchStack<A> extends ArrayDeque<A> implements DataStructure<A> {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = -1396748782494268710L;
 
 	@Override
