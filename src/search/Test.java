@@ -6,8 +6,15 @@ import search.datastructures.SearchStack;
 import search.graph.Coordinate;
 import search.graph.Node;
 
+/**
+ * A class to test the Search methods on a graph
+ * 
+ * @author Jack Hair
+ */
+
 public class Test {
 
+	@SuppressWarnings("javadoc")
 	public static void main(String[] args) {
 		// All testing done on things that are not nicks graph
 

@@ -2,13 +2,21 @@ package ilist;
 
 /**
  * Implementation of a list that has a head and a tail (using the "composite pattern").
+ * 
+ * @author Martin Escardo
+ * @param <E> @inheritDoc
  */
-
 public class Cons<E> implements IList<E> {
 
 	private final E head;
 	private final IList<E> tail; // Reference to another list
 
+	/**
+	 * Create a list from a head and a tail
+	 * 
+	 * @param head The head of the list, of type element
+	 * @param tail The tail of the list, of type {@link IList}
+	 */
 	public Cons(E head, IList<E> tail) {
 		assert (tail != null); // Tail should NOT be null. Use Nil instead.
 		// See
@@ -18,6 +26,11 @@ public class Cons<E> implements IList<E> {
 		this.tail = tail;
 	}
 
+	/**
+	 * Gets whether the {@link IList} is empty
+	 * 
+	 * @return {@code true} if the {@link ilist.IList} is empty
+	 */
 	@Override
 	public boolean isEmpty() {
 		return false;

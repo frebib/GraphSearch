@@ -11,6 +11,9 @@ package maybe;
 
 /**
  * Implementation of Just (using the "composite pattern").
+ * 
+ * @author Martin Escardo
+ * @param <A> @inheritDoc
  */
 
 public class Just<A> implements Maybe<A> {

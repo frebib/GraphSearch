@@ -10,7 +10,10 @@
 package maybe;
 
 /**
- * Implementation of Nothing (using the "composite pattern").
+ * Implementation of Nothing (using the "composite pattern").#
+ * 
+ * @author Martin Escardo
+ * @param <A> @inheritDoc
  */
 
 public class Nothing<A> implements Maybe<A> {

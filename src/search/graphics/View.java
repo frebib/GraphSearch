@@ -13,11 +13,21 @@ import java.awt.geom.Ellipse2D;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * View to display a {@link search.graphics.Traverser} on a {@link javax.swing.JPanel}
+ * 
+ * @author Kelsey McKenna
+ */
 public class View extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 
 	private Traverser traverser;
 
+	/**
+	 * Creates a new View
+	 * 
+	 * @param traverser {@link search.graphics.Traverser} to display
+	 */
 	public View(Traverser traverser) {
 		this.traverser = traverser;
 	}

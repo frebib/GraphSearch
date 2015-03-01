@@ -1,8 +1,27 @@
 package search.graph;
 
-public class Coordinate {
-	public int x, y;
+/**
+ * Represents a 2D integer Co-ordinate
+ * 
+ * @author Martin Escardo
+ */
 
+public class Coordinate {
+	/**
+	 * Represents the X value of the Coordinate
+	 */
+	public int x;
+	/**
+	 * Represents the Y value of the Coordinate
+	 */
+	public int y;
+
+	/**
+	 * Creates a Coordinate from {@code x} and {@code y} values
+	 * 
+	 * @param x The X value
+	 * @param y The Y value
+	 */
 	public Coordinate(int x, int y) {
 		this.x = x;
 		this.y = y;

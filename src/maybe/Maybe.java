@@ -1,7 +1,10 @@
 package maybe;
 
 /**
- * Interface for the Maybe type using the "composite pattern". We include high-order methods. We will use A,B,C for type variables.
+ * Interface for the Maybe type using the "composite pattern". We include high-order methods. We will use A,B,C for type variables.#
+ * 
+ * @author Martin Escardo
+ * @param <A> Type of object to be a Maybe
  */
 
 public interface Maybe<A> {

@@ -6,12 +6,18 @@ import maybe.Predicate;
 import search.datastructures.SearchPriorityQueue;
 import search.graph.Node;
 
+/**
+ * Searches a Node collection using A* search
+ * 
+ * @author Joe Groocock
+ */
+
 public class AStar {
 
 	/**
-	 * Finds a Node in a {@link Graph} using A* Search
+	 * Finds a Node in a {@link search.graph.Graph} using A* Search
 	 * 
-	 * @param start The {@link Node} to start searching from
+	 * @param start The {@link search.graph.Node} to start searching from
 	 * @param p A {@link Predicate} to check each node against determining the target {@link Node}
 	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
 	 */

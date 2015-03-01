@@ -16,15 +16,23 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * A class to conduct different types of search on a given data structure
+ * 
+ * @author Jack Hair
+ * @author Joe Groocock
+ * @author Hannah Evans
+ */
+
 public class Search {
 
 	/**
-	 * Finds a Node in a {@link Graph}
+	 * Finds a Node in a {@link search.graph.Graph}
 	 * 
-	 * @param start The {@link Node} to start searching from
-	 * @param p A {@link Predicate} to check each node against determining the target {@link Node}
+	 * @param start The {@link search.graph.Node} to start searching from
+	 * @param p A {@link Predicate} to check each node against determining the target {@link search.graph.Node}
 	 * @param frontier A {@link Collection} to store the frontier set in
-	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
+	 * @return Maybe a path from {@code start} to a {@link search.graph.Node} which satisfies the {@link Predicate} {@code p}
 	 */
 	public static <A, B extends DataStructure<Node<A>>> Maybe<Node<A>> findNodeFrom(Node<A> start, Predicate<A> p, B frontier) {
 		Set<Node<A>> visited = new HashSet<Node<A>>();
@@ -48,10 +56,10 @@ public class Search {
 	/**
 	 * Finds a path between connected nodes
 	 * 
-	 * @param start The {@link Node} to start path-finding from
-	 * @param p A {@link Predicate} to check each node against determining the destination {@link Node}
+	 * @param start The {@link search.graph.Node} to start path-finding from
+	 * @param p A {@link Predicate} to check each node against determining the destination {@link search.graph.Node}
 	 * @param frontier A {@link Collection} to store the frontier set in
-	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
+	 * @return Maybe a path from {@code start} to a {@link search.graph.Node} which satisfies the {@link Predicate} {@code p}
 	 */
 	public static <A, B extends DataStructure<Node<A>>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Predicate<A> p, B frontier) {
 		Map<Node<A>, Node<A>> visited = new LinkedHashMap<Node<A>, Node<A>>();

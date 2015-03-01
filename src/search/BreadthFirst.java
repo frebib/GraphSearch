@@ -6,10 +6,16 @@ import maybe.Predicate;
 import search.datastructures.SearchQueue;
 import search.graph.Node;
 
+/**
+ * Searches a Node collection using Breadth-First search
+ * 
+ * @author Joe Groocock
+ */
+
 public class BreadthFirst {
 
 	/**
-	 * Finds a Node in a {@link Graph} using Breadth First Search
+	 * Finds a Node in a {@link search.graph.Graph} using Breadth First Search
 	 * 
 	 * @param start The {@link Node} to start searching from
 	 * @param p A {@link Predicate} to check each node against determining the target {@link Node}

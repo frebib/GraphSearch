@@ -6,11 +6,23 @@ import search.graph.Node;
 
 import java.util.Observable;
 
+/**
+ * Traverses a path of {@link Node}s to be displayed on a {@link View}
+ * 
+ * @author Kelsey McKenna
+ */
+
 public class Traverser extends Observable {
 	private Node<Coordinate> currentNode;
 	private boolean isRunning = false;
 	private boolean destinationReached = false;
 
+	/**
+	 * Starts a traversal
+	 * 
+	 * @param path Path to traverse
+	 * @param t Time to sleep
+	 */
 	public void runTraversal(IList<Node<Coordinate>> path, int t) {
 		if (path.isEmpty())
 			return;
@@ -58,14 +70,29 @@ public class Traverser extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * Gets the current {@link Node} in the traversal
+	 * 
+	 * @return Current {@link Node}
+	 */
 	public Node<Coordinate> getCurrentNode() {
 		return currentNode;
 	}
 
+	/**
+	 * Gets whether the traversal is running
+	 * 
+	 * @return true if running
+	 */
 	public boolean isRunning() {
 		return isRunning;
 	}
 
+	/**
+	 * Gets whether the end has been reached
+	 * 
+	 * @return true if end reached
+	 */
 	public boolean endReached() {
 		return destinationReached;
 	}
