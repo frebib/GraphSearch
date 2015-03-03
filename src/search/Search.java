@@ -3,7 +3,6 @@ package search;
 import ilist.Cons;
 import ilist.IList;
 import ilist.Nil;
-import maybe.Function;
 import maybe.Function2;
 import maybe.Just;
 import maybe.Maybe;
@@ -99,12 +98,12 @@ public class Search {
 		}
 		return new Nothing<>();
 	}
-	
+
 	public static <A> Maybe<IList<Node<A>>> findPathFromAStar(Node<A> origin, Node<A> destination, Function2<Node<A>, Node<A>, Double> h, Function2<Node<A>, Node<A>, Double> d) {
 		Set<Node<A>> visited = new HashSet<Node<A>>();
 		Queue<Node<A>> pending = new PriorityQueue<Node<A>>(new NodeComparator<A>());
 		Map<Node<A>, Node<A>> pred = new LinkedHashMap<Node<A>, Node<A>>();
-		Map<Node<A>, Double> D = new HashMap<Node<A>,Double>();
+		Map<Node<A>, Double> D = new HashMap<Node<A>, Double>();
 		D.put(origin, 0.0);
 		Map<Node<A>, Double> f = new HashMap<Node<A>, Double>();
 		f.put(origin, h.apply(origin, destination));
@@ -115,7 +114,7 @@ public class Search {
 		pending.add(origin);
 		while (!pending.isEmpty()) {
 			node = pending.poll();
-			
+
 			double cost;
 			if (node.equals(destination)) {		// At this point we reconstruct the path followed from the visited Map
 
@@ -132,18 +131,18 @@ public class Search {
 			}
 			else
 				visited.add(node);
-				for (Node<A> suc : node.getSuccessors())
-					if (!visited.contains(suc)) {
-						cost = D.get(node) + d.apply(node, suc);
-						if (!pending.contains(suc) || cost < D.get(suc)){
-							pred.put(suc, node);
-							D.put(suc, cost);
-							f.put(suc, D.get(suc) + h.apply(suc, destination));
-							suc.setF(D.get(suc) + h.apply(suc, destination));
-							if (!pending.contains(suc))
-								pending.add(suc);
-						}
+			for (Node<A> suc : node.getSuccessors())
+				if (!visited.contains(suc)) {
+					cost = D.get(node) + d.apply(node, suc);
+					if (!pending.contains(suc) || cost < D.get(suc)) {
+						pred.put(suc, node);
+						D.put(suc, cost);
+						f.put(suc, D.get(suc) + h.apply(suc, destination));
+						suc.setF(D.get(suc) + h.apply(suc, destination));
+						if (!pending.contains(suc))
+							pending.add(suc);
 					}
+				}
 		}
 		return new Nothing<>();
 	}
