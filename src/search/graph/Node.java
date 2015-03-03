@@ -7,11 +7,13 @@ import java.util.LinkedHashSet;
 
 public class Node<A> {
 	private A contents;
+	private double f;
 	private final Collection<Node<A>> successors;
 
 	public Node(A contents) {
 		this.contents = contents;
 		this.successors = new LinkedHashSet<Node<A>>();
+		this.f = 0.0;
 	}
 
 	public void addSuccessor(Node<A> s) {
@@ -30,9 +32,12 @@ public class Node<A> {
 		return contents.equals(c);
 	}
 
-	public float getHeuristic(Node<A> goal) {
-		throw new NotImplementedException();
-		// TODO: Add Heuristic function between co-ordinates using Point.distance()
+	public double getF(){
+		return f;
+	}
+	
+	public void setF(double f){
+		this.f = f;
 	}
 
 	@Override
