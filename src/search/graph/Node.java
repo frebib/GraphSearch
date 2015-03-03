@@ -1,7 +1,5 @@
 package search.graph;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
@@ -32,11 +30,11 @@ public class Node<A> {
 		return contents.equals(c);
 	}
 
-	public double getF(){
+	public double getF() {
 		return f;
 	}
-	
-	public void setF(double f){
+
+	public void setF(double f) {
 		this.f = f;
 	}
 
