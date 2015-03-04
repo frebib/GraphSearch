@@ -19,7 +19,7 @@ public class GraphViewer {
 
 		traverser.runTraversal(path, nodeDelay);
 		try {
-			Thread.sleep(8000);
+			Thread.sleep(nodeDelay * 2);
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();
