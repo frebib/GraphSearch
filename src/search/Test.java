@@ -1,10 +1,10 @@
 package search;
 
-import maybe.Predicate;
-import search.datastructures.SearchQueue;
-import search.datastructures.SearchStack;
-import search.graph.Coordinate;
+import ilist.IList;
+import search.graph.Graph;
+import search.graph.NicksGraph;
 import search.graph.Node;
+import search.graphics.GraphViewer;
 
 /**
  * A class to test the Search methods on a graph
@@ -13,16 +13,33 @@ import search.graph.Node;
  */
 
 public class Test {
-
-	@SuppressWarnings("javadoc")
 	public static void main(String[] args) {
-		// All testing done on things that are not nicks graph
+		final Graph<Coordinate> nicksGraph = NicksGraph.getGraph();
+		final Node<Coordinate> start = nicksGraph.nodeWith(new Coordinate(0, 0));
+		final Node<Coordinate> goal = new Node<Coordinate>(new Coordinate(9, 6));
+		final Node<Coordinate> inaccessable = new Node<Coordinate>(new Coordinate(4, 0));
 
-		Node<Coordinate> n1 = new Node<Coordinate>(new Coordinate(0, 0));
-		Node<Coordinate> n2 = new Node<Coordinate>(new Coordinate(1, 1));
-		Node<Coordinate> n3 = new Node<Coordinate>(new Coordinate(1, 2));
-		Node<Coordinate> n4 = new Node<Coordinate>(new Coordinate(2, 3));
-		Node<Coordinate> n5 = new Node<Coordinate>(new Coordinate(2, 4));
+		// Assert that the findNodeFrom methods work correctly
+		assert (BreadthFirst.findNodeFrom(start, goal).has(goal));
+		assert (DepthFirst.findNodeFrom(start, goal).has(goal));
+		assert (BreadthFirst.findNodeFrom(start, inaccessable).isNothing());
+		assert (DepthFirst.findNodeFrom(start, inaccessable).isNothing());
+
+		IList<Node<Coordinate>> path1 = BreadthFirst.findPathFrom(start, goal).fromMaybe();
+		IList<Node<Coordinate>> path2 = DepthFirst.findPathFrom(start, goal).fromMaybe();
+		System.out.println(path1 + "\n" + path2);
+
+		//IList<Node<Coordinate>> path = AStar.findPathFrom(start, goal, SearchFunction.manhattan, SearchFunction.euclidean).fromMaybe();
+		GraphViewer.traversePath(path1, 350);
+	}
+
+	@SuppressWarnings("unused")
+	private static Node<Coordinate> getTestGraph() {
+		Node<Coordinate> n1 = new Node<Coordinate>(new Coordinate(0, 0));	//         0,0
+		Node<Coordinate> n2 = new Node<Coordinate>(new Coordinate(1, 1));	//       /     \
+		Node<Coordinate> n3 = new Node<Coordinate>(new Coordinate(1, 2));	//    1,1       1,2
+		Node<Coordinate> n4 = new Node<Coordinate>(new Coordinate(2, 3));	//   /   \     /   \
+		Node<Coordinate> n5 = new Node<Coordinate>(new Coordinate(2, 4));	// 2,3  2,4   2,6  2,7
 		Node<Coordinate> n6 = new Node<Coordinate>(new Coordinate(2, 6));
 		Node<Coordinate> n7 = new Node<Coordinate>(new Coordinate(2, 7));
 
@@ -35,14 +52,6 @@ public class Test {
 		n1.addSuccessor(n2);
 		n1.addSuccessor(n3);
 
-		Predicate<Coordinate> p1 = p -> p.y == 4;
-		Predicate<Coordinate> p2 = p -> p.y == 0;
-
-		System.out.println(Search.findNodeFrom(n1, p2, new SearchQueue<Node<Coordinate>>()));
-		System.out.println(BreadthFirst.findNodeFrom(n1, p1) + "\n");
-		System.out.println(Search.findNodeFrom(n1, p1, new SearchStack<Node<Coordinate>>()));
-		System.out.println(DepthFirst.findNodeFrom(n1, p1));
-		System.out.println(Search.findPathFrom(n1, p1, new SearchStack<Node<Coordinate>>()));
-		System.out.println(Search.findPathFrom(n1, p2, new SearchStack<Node<Coordinate>>()));
+		return n1;
 	}
 }
