@@ -1,59 +1,20 @@
 package search.graph;
 
-import ilist.IList;
-import maybe.Predicate;
-import search.BreadthFirst;
-import search.DepthFirst;
-import search.graphics.Traverser;
-import search.graphics.View;
-
-import javax.swing.JFrame;
+import search.Coordinate;
 
 import java.util.Map;
 
 public class NicksGraph {
-	public static void main(String args[]) {
-		Graph<Coordinate> nicksGraph = getNicksGraph();
-		// Create the start node and end node
-		Node<Coordinate> start = nicksGraph.nodeWith(new Coordinate(0, 0));
-		final Node<Coordinate> end = nicksGraph.nodeWith(new Coordinate(8, 6));
-		final Node<Coordinate> inaccessableNode = nicksGraph.nodeWith(new Coordinate(4, 0));
-
-		Predicate<Coordinate> p1 = a -> a == end.getContents();
-		Predicate<Coordinate> p2 = a -> a == inaccessableNode.getContents();
-
-		// Assert that the findNodeFrom methods work correctly
-		assert (BreadthFirst.findNodeFrom(start, p1).has(end));
-		assert (DepthFirst.findNodeFrom(start, p1).has(end));
-		assert (BreadthFirst.findNodeFrom(start, p2).isNothing());
-		assert (DepthFirst.findNodeFrom(start, p2).isNothing());
-		IList<Node<Coordinate>> path = BreadthFirst.findPathFrom(start, p1).fromMaybe();
-		System.out.println(path);
-
-		Traverser traverser = new Traverser();
-		View v = new View(traverser);
-		traverser.addObserver(v);
-
-		int speed = 500;
-
-		JFrame frame = new JFrame("Graph");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(900, 600);
-		frame.add(v);
-		frame.setVisible(true);
-
-		traverser.runTraversal(path, speed);
-	}
 	public static void printGraph(Graph<Coordinate> graph) {
 		for (Map.Entry<Coordinate, Node<Coordinate>> e : graph.nodes().entrySet()) {
 			Coordinate c = e.getKey();
 			Node<Coordinate> node = e.getValue();
 
-			assert (c.equals(node.getContents()));
+			assert (c.equals(node.contents));
 
 			System.out.print(c + "): ");
 			for (Node<Coordinate> s : node.getSuccessors())
-				System.out.print(s.getContents() + "), ");
+				System.out.print(s.contents + "), ");
 			System.out.println();
 		}
 	}
@@ -84,7 +45,7 @@ public class NicksGraph {
 		return graph;
 	}
 
-	public static Graph<Coordinate> getNicksGraph() {
+	public static Graph<Coordinate> getGraph() {
 		return parseGraph(getNicksValues());
 	}
 	private static int[][] getNicksValues() {
