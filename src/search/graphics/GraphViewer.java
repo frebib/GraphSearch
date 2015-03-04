@@ -1,8 +1,7 @@
 package search.graphics;
 
-import search.Coordinate;
-
 import ilist.IList;
+import search.Coordinate;
 import search.graph.Node;
 
 import javax.swing.JFrame;
@@ -19,5 +18,13 @@ public class GraphViewer {
 		frame.setVisible(true);
 
 		traverser.runTraversal(path, nodeDelay);
+		try {
+			Thread.sleep(8000);
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		frame.setVisible(false);
+		frame.dispose();
 	}
 }
