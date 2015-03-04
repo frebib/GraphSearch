@@ -1,6 +1,6 @@
 package search.graphics;
 
-import search.graph.Coordinate;
+import search.Coordinate;
 
 import javax.swing.JPanel;
 

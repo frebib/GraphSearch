@@ -1,6 +1,5 @@
-package search.graph;
+package search;
 
-import search.Heuristic;
 
 /**
  * Represents a 2D integer Co-ordinate

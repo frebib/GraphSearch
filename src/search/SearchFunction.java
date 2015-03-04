@@ -1,7 +1,6 @@
 package search;
 
 import maybe.Function2;
-import search.graph.Coordinate;
 import search.graph.Node;
 
 public interface SearchFunction<A extends Heuristic<A>> extends Function2<Node<A>, Node<A>, Float> {

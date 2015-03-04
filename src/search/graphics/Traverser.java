@@ -1,7 +1,8 @@
 package search.graphics;
 
+import search.Coordinate;
+
 import ilist.IList;
-import search.graph.Coordinate;
 import search.graph.Node;
 
 import java.util.Observable;
