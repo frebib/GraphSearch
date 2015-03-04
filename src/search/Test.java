@@ -25,12 +25,12 @@ public class Test {
 		assert (BreadthFirst.findNodeFrom(start, inaccessable).isNothing());
 		assert (DepthFirst.findNodeFrom(start, inaccessable).isNothing());
 
-		IList<Node<Coordinate>> path1 = BreadthFirst.findPathFrom(start, goal).fromMaybe();
-		IList<Node<Coordinate>> path2 = DepthFirst.findPathFrom(start, goal).fromMaybe();
-		System.out.println(path1 + "\n" + path2);
+		IList<Node<Coordinate>> bf = BreadthFirst.findPathFrom(start, goal).fromMaybe();
+		IList<Node<Coordinate>> df = DepthFirst.findPathFrom(start, goal).fromMaybe();
+		IList<Node<Coordinate>> as = AStar.findPathFrom(start, goal, SearchFunction.manhattan, SearchFunction.euclidean).fromMaybe();
+		System.out.println(bf + "\n" + df + "\n" + as);
 
-		//IList<Node<Coordinate>> path = AStar.findPathFrom(start, goal, SearchFunction.manhattan, SearchFunction.euclidean).fromMaybe();
-		GraphViewer.traversePath(path1, 350);
+		GraphViewer.traversePath(bf, 350);
 	}
 
 	@SuppressWarnings("unused")
