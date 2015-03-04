@@ -1,12 +1,14 @@
 package search.graph;
 
+import search.Heuristic;
+
 /**
  * Represents a 2D integer Co-ordinate
  * 
  * @author Martin Escardo
  */
 
-public class Coordinate {
+public class Coordinate implements Heuristic<Coordinate> {
 	/**
 	 * Represents the X value of the Coordinate
 	 */
@@ -15,6 +17,8 @@ public class Coordinate {
 	 * Represents the Y value of the Coordinate
 	 */
 	public int y;
+
+	private float heuristic, cost;
 
 	/**
 	 * Creates a Coordinate from {@code x} and {@code y} values
@@ -28,13 +32,25 @@ public class Coordinate {
 	}
 
 	@Override
-	public String toString() {
-		return "(" + x + ", " + y + ")";
+	public float getCost() {
+		return cost;
+	}
+	@Override
+	public float getHeuristic() {
+		return heuristic;
+	}
+	@Override
+	public float getF() {
+		return cost + heuristic;
 	}
 
 	@Override
-	public int hashCode() {
-		return x + y << 16;
+	public void setCost(float cost) {
+		this.cost = cost;
+	}
+	@Override
+	public void setHeuristic(float heuristic) {
+		this.heuristic = heuristic;
 	}
 
 	@Override
@@ -51,5 +67,13 @@ public class Coordinate {
 		if (y != other.y)
 			return false;
 		return true;
+	}
+	@Override
+	public int hashCode() {
+		return x + y << 16;
+	}
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ")";
 	}
 }
