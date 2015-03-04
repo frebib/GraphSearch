@@ -20,7 +20,7 @@ public class BreadthFirst {
 	 * @param p A {@link Predicate} to check each node against determining the target {@link Node}
 	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
 	 */
-	public static <A extends Heuristic<A>> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal) {
+	public static <A> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal) {
 		SearchFunction<A> nothing = (a, b) -> 0f;
 		return Search.findNodeFrom(start, goal, new SearchQueue<Node<A>>(), nothing, nothing);
 	}
@@ -32,7 +32,7 @@ public class BreadthFirst {
 	 * @param p A {@link Predicate} to check each node against determining the destination {@link Node}
 	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
 	 */
-	public static <A extends Heuristic<A>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal) {
+	public static <A> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal) {
 		SearchFunction<A> nothing = (a, b) -> 0f;
 		return Search.findPathFrom(start, goal, new SearchQueue<Node<A>>(), nothing, nothing);
 	}

@@ -32,15 +32,15 @@ public class Search {
 	 * @param frontier A {@link Collection} to store the frontier set in
 	 * @return Maybe a path from {@code start} to a {@link search.graph.Node} which satisfies the {@link Predicate} {@code p}
 	 */
-	public static <A extends Heuristic<A>, B extends DataStructure<Node<A>>> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> costFunc) {
+	public static <A, B extends DataStructure<Node<A>>> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> costFunc) {
 		Set<Node<A>> visited = new HashSet<Node<A>>();
 		Node<A> node = null;
 
 		if (start.contentsEquals(goal.contents))
 			return new Nothing<>();
 
-		start.contents.setHeuristic(heuristic.apply(start, goal));
-		start.contents.setCost(0);
+		start.setHeuristic(heuristic.apply(start, goal));
+		start.setCost(0);
 		frontier.add(start);						// Adds the node to the frontier in the manner specified by the data structure
 
 		while (!frontier.isEmpty()) {
@@ -50,9 +50,9 @@ public class Search {
 			else
 				for (Node<A> suc : node.getSuccessors())
 					if (!visited.contains(suc)) {
-						float cost = node.contents.getCost() + costFunc.apply(node, suc);
-						suc.contents.setHeuristic(heuristic.apply(suc, goal));
-						suc.contents.setCost(cost);
+						float cost = node.getCost() + costFunc.apply(node, suc);
+						suc.setHeuristic(heuristic.apply(suc, goal));
+						suc.setCost(cost);
 
 						frontier.add(suc);				// Add all successors to the frontier set so they can
 						visited.add(suc);				// be searched on a later iteration of this while loop
@@ -68,15 +68,15 @@ public class Search {
 	 * @param frontier A {@link Collection} to store the frontier set in
 	 * @return Maybe a path from {@code start} to a {@link search.graph.Node} which satisfies the {@link Predicate} {@code p}
 	 */
-	public static <A extends Heuristic<A>, B extends DataStructure<Node<A>>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> costFunc) {
+	public static <A, B extends DataStructure<Node<A>>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> costFunc) {
 		Map<Node<A>, Node<A>> visited = new LinkedHashMap<Node<A>, Node<A>>();
 		Node<A> node = null;
 
 		if (start.contentsEquals(goal.contents))
 			return new Nothing<>();
 
-		start.contents.setHeuristic(heuristic.apply(start, goal));
-		start.contents.setCost(0);
+		start.setHeuristic(heuristic.apply(start, goal));
+		start.setCost(0);
 		frontier.add(start);
 
 		while (!frontier.isEmpty()) {
@@ -97,9 +97,9 @@ public class Search {
 			else
 				for (Node<A> suc : node.getSuccessors())
 					if (!visited.containsKey(suc)) {
-						float cost = node.contents.getCost() + costFunc.apply(node, suc);
-						suc.contents.setHeuristic(heuristic.apply(suc, goal));
-						suc.contents.setCost(cost);
+						float cost = node.getCost() + costFunc.apply(node, suc);
+						suc.setHeuristic(heuristic.apply(suc, goal));
+						suc.setCost(cost);
 
 						frontier.add(suc);					// Add successor to frontier to allow it to be searched from
 						visited.put(suc, node);				// Set the node as visited

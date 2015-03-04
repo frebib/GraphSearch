@@ -21,7 +21,7 @@ public class AStar {
 	 * @param p A {@link Predicate} to check each node against determining the target {@link Node}
 	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
 	 */
-	public static <A extends Heuristic<A>> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal, SearchFunction<A> heuristic, SearchFunction<A> cost) {
+	public static <A> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal, SearchFunction<A> heuristic, SearchFunction<A> cost) {
 		return Search.findNodeFrom(start, goal, new SearchPriorityQueue<Node<A>>(new NodeComparer<A>()), heuristic, cost);
 	}
 
@@ -32,7 +32,7 @@ public class AStar {
 	 * @param p A {@link Predicate} to check each node against determining the destination {@link Node}
 	 * @return Maybe a path from {@code start} to a {@link Node} which satisfies the {@link Predicate} {@code p}
 	 */
-	public static <A extends Heuristic<A>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal, SearchFunction<A> heuristic, SearchFunction<A> cost) {
+	public static <A> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal, SearchFunction<A> heuristic, SearchFunction<A> cost) {
 		return Search.findPathFrom(start, goal, new SearchPriorityQueue<Node<A>>(new NodeComparer<A>()), heuristic, cost);
 	}
 }

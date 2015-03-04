@@ -1,10 +1,10 @@
 package search;
 
 import ilist.IList;
+import maybe.Maybe;
 import search.graph.Graph;
 import search.graph.NicksGraph;
 import search.graph.Node;
-import search.graphics.GraphViewer;
 
 /**
  * A class to test the Search methods on a graph
@@ -20,17 +20,17 @@ public class Test {
 		final Node<Coordinate> inaccessable = new Node<Coordinate>(new Coordinate(4, 0));
 
 		// Assert that the findNodeFrom methods work correctly
-		assert (BreadthFirst.findNodeFrom(start, goal).has(goal));
-		assert (DepthFirst.findNodeFrom(start, goal).has(goal));
-		assert (BreadthFirst.findNodeFrom(start, inaccessable).isNothing());
-		assert (DepthFirst.findNodeFrom(start, inaccessable).isNothing());
+		assert (!BreadthFirst.findPathFrom(start, goal).isNothing());
+		assert (!DepthFirst.findPathFrom(start, goal).isNothing());
+		assert (BreadthFirst.findPathFrom(start, inaccessable).isNothing());
+		assert (DepthFirst.findPathFrom(start, inaccessable).isNothing());
 
-		IList<Node<Coordinate>> bf = BreadthFirst.findPathFrom(start, goal).fromMaybe();
-		IList<Node<Coordinate>> df = DepthFirst.findPathFrom(start, goal).fromMaybe();
-		IList<Node<Coordinate>> as = AStar.findPathFrom(start, goal, SearchFunction.manhattan, SearchFunction.euclidean).fromMaybe();
+		Maybe<IList<Node<Coordinate>>> bf = BreadthFirst.findPathFrom(start, inaccessable);
+		Maybe<IList<Node<Coordinate>>> df = DepthFirst.findPathFrom(start, inaccessable);
+		Maybe<IList<Node<Coordinate>>> as = AStar.findPathFrom(start, inaccessable, SearchFunction.manhattan, SearchFunction.euclidean);
 		System.out.println(bf + "\n" + df + "\n" + as);
 
-		GraphViewer.traversePath(bf, 350);
+		//GraphViewer.traversePath(as.fromMaybe(), 350);
 	}
 
 	@SuppressWarnings("unused")

@@ -1,13 +1,12 @@
 package search;
 
-
 /**
  * Represents a 2D integer Co-ordinate
  * 
  * @author Martin Escardo
  */
 
-public class Coordinate implements Heuristic<Coordinate> {
+public class Coordinate {
 	/**
 	 * Represents the X value of the Coordinate
 	 */
@@ -16,8 +15,6 @@ public class Coordinate implements Heuristic<Coordinate> {
 	 * Represents the Y value of the Coordinate
 	 */
 	public int y;
-
-	private float heuristic, cost;
 
 	/**
 	 * Creates a Coordinate from {@code x} and {@code y} values
@@ -28,28 +25,6 @@ public class Coordinate implements Heuristic<Coordinate> {
 	public Coordinate(int x, int y) {
 		this.x = x;
 		this.y = y;
-	}
-
-	@Override
-	public float getCost() {
-		return cost;
-	}
-	@Override
-	public float getHeuristic() {
-		return heuristic;
-	}
-	@Override
-	public float getF() {
-		return cost + heuristic;
-	}
-
-	@Override
-	public void setCost(float cost) {
-		this.cost = cost;
-	}
-	@Override
-	public void setHeuristic(float heuristic) {
-		this.heuristic = heuristic;
 	}
 
 	@Override
