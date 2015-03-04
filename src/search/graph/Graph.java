@@ -1,5 +1,7 @@
 package search.graph;
 
+import search.Heuristic;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -7,7 +9,7 @@ import java.util.Map;
 // This assumes that each node has a unique contents.
 // This is a minimal class so that a graph can be created.
 
-public class Graph<A> {
+public class Graph<A extends Heuristic<A>> {
 
 	// Keep the implementation of maps open, by using the Map interface:
 	Map<A, Node<A>> nodes;
