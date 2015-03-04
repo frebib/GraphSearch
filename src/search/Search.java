@@ -82,7 +82,6 @@ public class Search {
 		while (!frontier.isEmpty()) {
 			node = frontier.getHead();
 			if (node.contentsEquals(goal.contents)) {	// At this point we reconstruct the path followed from the visited Map
-
 				visited.put(start, null);				// Add start Node as it will be first element in list (last one to be added)
 
 				IList<Node<A>> list = new Nil<>();
@@ -107,64 +106,4 @@ public class Search {
 		}
 		return new Nothing<>();
 	}
-	/*
-	public static <A> Maybe<IList<Node<A>>> findPathFromAStar(Node<A> origin, Node<A> goal, Function2<Node<A>, Node<A>, Double> heuristicFunc, Function2<Node<A>, Node<A>, Double> costFunc) {
-		Set<Node<A>> visited = new HashSet<Node<A>>();
-		Queue<Node<A>> pending = new PriorityQueue<Node<A>>(new NodeComparator<A>());
-		Map<Node<A>, Node<A>> predecessors = new LinkedHashMap<Node<A>, Node<A>>();
-		Map<Node<A>, Double> D = new HashMap<Node<A>, Double>();
-		Map<Node<A>, Double> f = new HashMap<Node<A>, Double>();
-		D.put(origin, 0.0);
-		f.put(origin, heuristicFunc.apply(origin, goal));
-		origin.setF(heuristicFunc.apply(origin, goal));
-		D.put(origin, heuristicFunc.apply(origin, goal));
-		Node<A> node = null;
-
-		pending.add(origin);
-		while (!pending.isEmpty()) {
-			node = pending.poll();
-
-			double cost;
-			if (node.equals(goal)) {		// At this point we reconstruct the path followed from the visited Map
-				//for (Map.Entry<Node<A>, Node<A>> e : pred.entrySet())
-				//	System.out.println(e.getKey() + ": " + e.getValue());
-
-				predecessors.put(origin, null);			// Add start Node as it will be first element in list (last one to be added)
-
-				IList<Node<A>> list = new Nil<>();
-				while (node != null) {				// Iterate through the nodes in the visited map
-					list = new Cons<>(node, list);	// Add the current node to the resulting path
-					node = predecessors.get(node);		// Get the parent of the node from the Key-Value
-				}									// pair in the Map using the node as the key
-
-				assert (list.size() > 1);			// It should never be that the only node in the list
-				return new Just<>(list);			// is the start node; that should catch at the start.
-			}
-			else
-				visited.add(node);
-			for (Node<A> suc : node.getSuccessors())
-				if (!visited.contains(suc)) {
-					cost = D.get(node) + costFunc.apply(node, suc);
-					if (!pending.contains(suc) || cost < D.get(suc)) {
-						predecessors.put(suc, node);
-						D.put(suc, cost);
-						f.put(suc, D.get(suc) + heuristicFunc.apply(suc, goal));
-						suc.setF(D.get(suc) + heuristicFunc.apply(suc, goal));
-						if (!pending.contains(suc)) {
-							pending.add(suc);
-
-							Object[] arr = pending.toArray();
-							for (int i = 0; i < arr.length - 1; i++) {
-								System.out.println(arr[i] + ": " + f.get(arr[i]));
-								assert (f.get(arr[i]) > f.get(arr[i + 1]));
-								System.out.println(f.get(arr[i]) > f.get(arr[i + 1]));
-							}
-							System.out.println("----------------");
-						}
-					}
-				}
-		}
-		return new Nothing<>();
-	}
-	*/
 }
