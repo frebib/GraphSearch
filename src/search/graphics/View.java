@@ -30,6 +30,7 @@ public class View extends JPanel implements Observer {
 	 */
 	public View(Traverser traverser) {
 		this.traverser = traverser;
+		traverser.addObserver(this);
 	}
 
 	@Override
