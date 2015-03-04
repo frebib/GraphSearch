@@ -1,11 +1,9 @@
 package search.graph;
 
-import search.Heuristic;
-
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
-public class Node<A> implements Heuristic<A> {
+public class Node<A> {
 	private final Collection<Node<A>> successors;
 	public final A contents;
 
@@ -23,24 +21,18 @@ public class Node<A> implements Heuristic<A> {
 		return successors;
 	}
 
-	@Override
 	public float getCost() {
 		return cost;
 	}
-	@Override
 	public float getHeuristic() {
 		return heuristic;
 	}
-	@Override
 	public float getF() {
 		return cost + heuristic;
 	}
-
-	@Override
 	public void setCost(float cost) {
 		this.cost = cost;
 	}
-	@Override
 	public void setHeuristic(float heuristic) {
 		this.heuristic = heuristic;
 	}

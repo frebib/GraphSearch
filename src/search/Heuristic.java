@@ -1,5 +1,6 @@
 package search;
 
+@Deprecated
 public interface Heuristic<A> {
 	/**
 	 * Calculate Heuristic function from current to the end Heuristic object
