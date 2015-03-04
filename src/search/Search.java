@@ -39,8 +39,8 @@ public class Search {
 		if (start.contentsEquals(goal.contents))
 			return new Nothing<>();
 
-		start.contents.setCost(0);
 		start.contents.setHeuristic(heuristic.apply(start, goal));
+		start.contents.setCost(0);
 		frontier.add(start);						// Adds the node to the frontier in the manner specified by the data structure
 
 		while (!frontier.isEmpty()) {
@@ -75,8 +75,8 @@ public class Search {
 		if (start.contentsEquals(goal.contents))
 			return new Nothing<>();
 
-		start.contents.setCost(0);
 		start.contents.setHeuristic(heuristic.apply(start, goal));
+		start.contents.setCost(0);
 		frontier.add(start);
 
 		while (!frontier.isEmpty()) {
