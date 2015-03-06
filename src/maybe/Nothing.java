@@ -1,93 +1,76 @@
-// WHAT (NOT) TO DO:
-// -------------------
-// REPLACE the "Exercise" lines with code (possibly empty code).
-// LEAVE ALONE the "Exercise" lines for parts you are not solving.
-//
-// To get any marks for the whole exercise, your submission should
-// compile using the "compile" script. Submissions that don't compile
-// won't get any marks.
-
 package maybe;
 
 /**
  * Implementation of Nothing (using the "composite pattern").#
- * 
+ *
  * @author Martin Escardo
- * @param <A> @inheritDoc
+ * @param <E> @inheritDoc
  */
 
-public class Nothing<A> implements Maybe<A> {
+public class Nothing<E> implements Maybe<E> {
 
+	/**
+	 * Create an empty Maybe
+	 */
 	public Nothing() {
-		// throw new Exercise("Nothing:Nothing");
 	}
 
 	@Override
 	public boolean isNothing() {
-		// throw new Exercise("Nothing:isNothing");
 		return true;
 	}
 
 	@Override
 	public int size() {
-		// throw new Exercise("Nothing:size");
 		return 0;
 	}
 
 	@Override
 	public String toString() {
-		// throw new Exercise("Nothing:toString");
 		return "Nothing";
 	}
 
 	@Override
-	public boolean has(A a) {
-		// throw new Exercise("Nothing:has");
+	public boolean has(E a) {
 		return false;
 	}
 
 	// Higher-order functions:
 
 	@Override
-	public Maybe<A> filter(Predicate<A> p) {
-		// throw new Exercise("Nothing:filter");
+	public Maybe<E> filter(Predicate<E> p) {
 		return this;
 	}
 
 	@Override
-	public <B> Maybe<B> map(Function<A, B> f) {
-		// throw new Exercise("Nothing:map");
+	public <B> Maybe<B> map(Function<E, B> f) {
 		return new Nothing<B>();
 	}
 
 	@Override
-	public <B> B fold(Function<A, B> f, B b) {
-		// throw new Exercise("Nothing:fold");
+	public <B> B fold(Function<E, B> f, B b) {
 		return b;
 	}
 
 	@Override
-	public boolean all(Predicate<A> p) {
-		// throw new Exercise("Nothing:all");
+	public boolean all(Predicate<E> p) {
 		return true;
 	}
 
 	@Override
-	public boolean some(Predicate<A> p) {
-		// throw new Exercise("Nothing:some");
+	public boolean some(Predicate<E> p) {
 		return false;
 	}
 
 	@Override
-	public void forEach(Action<A> f) {
-		// throw new Exercise("Nothing:forEach");
-		// Nothing to do, but must have this method as Nothing implements the abstract class Maybe
+	public void forEach(Action<E> f) {
+		// Nothing to do, but must have this method as
+		// Nothing implements the abstract class Maybe
 	}
 
 	// Unsafe operations:
 	@Override
-	public A fromMaybe() {
-		// throw new Exercise("Nothing:fromMaybe");
+	public E fromMaybe() {
 		throw new RuntimeException("Nothing");
 	}
 }

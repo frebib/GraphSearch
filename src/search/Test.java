@@ -8,11 +8,12 @@ import search.graph.Node;
 
 /**
  * A class to test the Search methods on a graph
- * 
+ *
  * @author Jack Hair
  */
 
 public class Test {
+	@SuppressWarnings("javadoc")
 	public static void main(String[] args) {
 		final Graph<Coordinate> nicksGraph = NicksGraph.getGraph();
 		final Node<Coordinate> start = nicksGraph.nodeWith(new Coordinate(0, 0));

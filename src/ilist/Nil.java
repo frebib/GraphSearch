@@ -2,7 +2,7 @@ package ilist;
 
 /**
  * Implementation of the empty list (using the "composite pattern").
- * 
+ *
  * @author Martin Escardo
  * @param <E> @inheritDoc
  */

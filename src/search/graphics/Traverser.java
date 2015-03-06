@@ -1,18 +1,16 @@
 package search.graphics;
 
-import search.Coordinate;
-
 import ilist.IList;
+import search.Coordinate;
 import search.graph.Node;
 
 import java.util.Observable;
 
 /**
  * Traverses a path of {@link Node}s to be displayed on a {@link View}
- * 
+ *
  * @author Kelsey McKenna
  */
-
 public class Traverser extends Observable {
 	private Node<Coordinate> currentNode;
 	private boolean isRunning = false;
@@ -20,7 +18,7 @@ public class Traverser extends Observable {
 
 	/**
 	 * Starts a traversal
-	 * 
+	 *
 	 * @param path Path to traverse
 	 * @param t Time to sleep
 	 */
@@ -73,7 +71,7 @@ public class Traverser extends Observable {
 
 	/**
 	 * Gets the current {@link Node} in the traversal
-	 * 
+	 *
 	 * @return Current {@link Node}
 	 */
 	public Node<Coordinate> getCurrentNode() {
@@ -82,7 +80,7 @@ public class Traverser extends Observable {
 
 	/**
 	 * Gets whether the traversal is running
-	 * 
+	 *
 	 * @return true if running
 	 */
 	public boolean isRunning() {
@@ -91,7 +89,7 @@ public class Traverser extends Observable {
 
 	/**
 	 * Gets whether the end has been reached
-	 * 
+	 *
 	 * @return true if end reached
 	 */
 	public boolean endReached() {

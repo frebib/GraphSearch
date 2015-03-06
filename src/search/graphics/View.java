@@ -2,8 +2,6 @@ package search.graphics;
 
 import search.Coordinate;
 
-import javax.swing.JPanel;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,9 +11,11 @@ import java.awt.geom.Ellipse2D;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JPanel;
+
 /**
  * View to display a {@link search.graphics.Traverser} on a {@link javax.swing.JPanel}
- * 
+ *
  * @author Kelsey McKenna
  */
 public class View extends JPanel implements Observer {
@@ -25,7 +25,7 @@ public class View extends JPanel implements Observer {
 
 	/**
 	 * Creates a new View
-	 * 
+	 *
 	 * @param traverser {@link search.graphics.Traverser} to display
 	 */
 	public View(Traverser traverser) {

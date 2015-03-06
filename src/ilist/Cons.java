@@ -2,35 +2,27 @@ package ilist;
 
 /**
  * Implementation of a list that has a head and a tail (using the "composite pattern").
- * 
+ *
  * @author Martin Escardo
  * @param <E> @inheritDoc
  */
 public class Cons<E> implements IList<E> {
-
 	private final E head;
-	private final IList<E> tail; // Reference to another list
+	private final IList<E> tail; 	// Reference to another list
 
 	/**
 	 * Create a list from a head and a tail
-	 * 
+	 *
 	 * @param head The head of the list, of type element
 	 * @param tail The tail of the list, of type {@link IList}
 	 */
 	public Cons(E head, IList<E> tail) {
-		assert (tail != null); // Tail should NOT be null. Use Nil instead.
-		// See
-		// http://docs.oracle.com/javase/8/docs/technotes/guides/language/assert.html
+		assert (tail != null);		// Tail should NOT be null. Use Nil instead.
 
-		this.head = head; // The usual stuff now.
+		this.head = head;
 		this.tail = tail;
 	}
 
-	/**
-	 * Gets whether the {@link IList} is empty
-	 * 
-	 * @return {@code true} if the {@link ilist.IList} is empty
-	 */
 	@Override
 	public boolean isEmpty() {
 		return false;
@@ -38,9 +30,7 @@ public class Cons<E> implements IList<E> {
 
 	@Override
 	public int size() {
-		return 1 + tail.size(); // Is this a recursive call?
-		// I prefer to call this "delegation" rather
-		// than "recursion".
+		return 1 + tail.size();
 	}
 
 	@Override
@@ -61,18 +51,11 @@ public class Cons<E> implements IList<E> {
 	@Override
 	public IList<E> reverse() {
 		return tail.reverse().append(head);
-
-		// // Equivalently:
-		// IList <E> r = tail.reverse();
-		// IList <E> s = r.append(head);
-		// return s;
 	}
 
 	@Override
 	public boolean has(E e) {
 		return (head.equals(e) || tail.has(e));
-		// Short-circuit evaluation of "||" makes this efficient.
-		// Search for "short-circuit evaluation" in the internet.
 	}
 
 	@Override

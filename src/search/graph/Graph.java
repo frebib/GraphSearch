@@ -7,19 +7,29 @@ import java.util.Map;
 // This assumes that each node has a unique contents.
 // This is a minimal class so that a graph can be created.
 
+/**
+ * Represents a Collection of {@link Node}{@code s} linked to their contents
+ *
+ * @author Martin Escardo
+ * @param <A> Element stored in the {@link Node}{@code s}
+ */
 public class Graph<A> {
-
 	// Keep the implementation of maps open, by using the Map interface:
-	Map<A, Node<A>> nodes;
+	private Map<A, Node<A>> nodes;
 
-	// Constructs the empty graph:
+	/**
+	 * Constructs a new empty {@link Graph}
+	 */
 	public Graph() {
-		// Choose any implementation of sets you please, but you need to
-		// choose one.
 		nodes = new LinkedHashMap<A, Node<A>>();
 	}
 
-	// Find or create node with a given contents c:
+	/**
+	 * Find or create {@link Node} with a given contents c
+	 *
+	 * @param c Contents of the {@link Node} to find
+	 * @return A {@link Node} with contents c
+	 */
 	public Node<A> nodeWith(A c) {
 		Node<A> node; // Deliberately uninitialized.
 		if (nodes.containsKey(c))
@@ -31,8 +41,12 @@ public class Graph<A> {
 		return node;
 	}
 
-	// Get method:
-	public Map<A, Node<A>> nodes() {
+	/**
+	 * Gets {@link Node}{@code s} in the {@link Graph}
+	 *
+	 * @return {@link Node}{@code s} from the {@link Graph}
+	 */
+	public Map<A, Node<A>> getNodes() {
 		return nodes;
 	}
 }

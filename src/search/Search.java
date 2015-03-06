@@ -16,23 +16,24 @@ import java.util.Set;
 
 /**
  * A class to conduct different types of search on a given data structure
- * 
+ *
  * @author Jack Hair
  * @author Joe Groocock
  * @author Hannah Evans
  */
 
 public class Search {
-
 	/**
 	 * Finds a Node in a {@link search.graph.Graph}
-	 * 
+	 *
 	 * @param start The {@link search.graph.Node} to start searching from
-	 * @param p A {@link Predicate} to check each node against determining the target {@link search.graph.Node}
-	 * @param frontier A {@link Collection} to store the frontier set in
-	 * @return Maybe a path from {@code start} to a {@link search.graph.Node} which satisfies the {@link Predicate} {@code p}
+	 * @param goal The {@link search.graph.Node} to searching for
+	 * @param frontier A {@link search.DataStructures.DataStructure} to store the frontier set of the {@link Search}
+	 * @param heuristic A Heuristic {@link maybe.Function2} to estimate the distance to the goal {@link search.graph.Node}
+	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.graph.Node}
+	 * @return {@link maybe.Maybe} a {@link search.graph.Node} from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
-	public static <A, B extends DataStructure<Node<A>>> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> costFunc) {
+	public static <A, B extends DataStructure<Node<A>>> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
 		Set<Node<A>> visited = new HashSet<Node<A>>();
 		Node<A> node = null;
 
@@ -50,9 +51,9 @@ public class Search {
 			else
 				for (Node<A> suc : node.getSuccessors())
 					if (!visited.contains(suc)) {
-						float cost = node.getCost() + costFunc.apply(node, suc);
+						float costVal = node.getCost() + cost.apply(node, suc);
 						suc.setHeuristic(heuristic.apply(suc, goal));
-						suc.setCost(cost);
+						suc.setCost(costVal);
 
 						frontier.add(suc);				// Add all successors to the frontier set so they can
 						visited.add(suc);				// be searched on a later iteration of this while loop
@@ -61,14 +62,16 @@ public class Search {
 		return new Nothing<>();
 	}
 	/**
-	 * Finds a path between connected nodes
-	 * 
+	 * Finds a path between connected {@link search.graph.Node}{@code s}
+	 *
 	 * @param start The {@link search.graph.Node} to start path-finding from
-	 * @param p A {@link Predicate} to check each node against determining the destination {@link search.graph.Node}
-	 * @param frontier A {@link Collection} to store the frontier set in
-	 * @return Maybe a path from {@code start} to a {@link search.graph.Node} which satisfies the {@link Predicate} {@code p}
+	 * @param goal The {@link search.graph.Node} to searching for
+	 * @param frontier A {@link search.DataStructures.DataStructure} to store the frontier set of the {@link Search}
+	 * @param heuristic A Heuristic {@link maybe.Function2} to estimate the distance to the goal {@link search.graph.Node}
+	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.graph.Node}
+	 * @return {@link maybe.Maybe} a Path from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
-	public static <A, B extends DataStructure<Node<A>>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> costFunc) {
+	public static <A, B extends DataStructure<Node<A>>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
 		Map<Node<A>, Node<A>> visited = new LinkedHashMap<Node<A>, Node<A>>();
 		Node<A> node = null;
 
@@ -96,9 +99,9 @@ public class Search {
 			else
 				for (Node<A> suc : node.getSuccessors())
 					if (!visited.containsKey(suc)) {
-						float cost = node.getCost() + costFunc.apply(node, suc);
+						float costVal = node.getCost() + cost.apply(node, suc);
 						suc.setHeuristic(heuristic.apply(suc, goal));
-						suc.setCost(cost);
+						suc.setCost(costVal);
 
 						frontier.add(suc);					// Add successor to frontier to allow it to be searched from
 						visited.put(suc, node);				// Set the node as visited

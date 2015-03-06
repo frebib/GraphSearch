@@ -2,7 +2,7 @@ package search;
 
 /**
  * Represents a 2D integer Co-ordinate
- * 
+ *
  * @author Martin Escardo
  */
 
@@ -18,7 +18,7 @@ public class Coordinate {
 
 	/**
 	 * Creates a Coordinate from {@code x} and {@code y} values
-	 * 
+	 *
 	 * @param x The X value
 	 * @param y The Y value
 	 */

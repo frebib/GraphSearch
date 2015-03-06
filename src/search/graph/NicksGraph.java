@@ -4,9 +4,20 @@ import search.Coordinate;
 
 import java.util.Map;
 
+/**
+ * Represents the Graph data for one of Nick Hawes' graphs
+ *
+ * @author Martin Escardo
+ * @author Joe Groocock
+ */
 public class NicksGraph {
+	/**
+	 * Prints a {@link Graph} to the console
+	 *
+	 * @param graph The {@link Graph} {@code graph}
+	 */
 	public static void printGraph(Graph<Coordinate> graph) {
-		for (Map.Entry<Coordinate, Node<Coordinate>> e : graph.nodes().entrySet()) {
+		for (Map.Entry<Coordinate, Node<Coordinate>> e : graph.getNodes().entrySet()) {
 			Coordinate c = e.getKey();
 			Node<Coordinate> node = e.getValue();
 
@@ -19,6 +30,12 @@ public class NicksGraph {
 		}
 	}
 
+	/**
+	 * Parses an Integer array of Coordinates and it's successors into a {@link Graph}
+	 *
+	 * @param values {@link Graph} values
+	 * @return A Graph containing the values
+	 */
 	public static Graph<Coordinate> parseGraph(int[][] values) {
 		Graph<Coordinate> graph = new Graph<Coordinate>();
 
@@ -44,7 +61,11 @@ public class NicksGraph {
 
 		return graph;
 	}
-
+	/**
+	 * Gets Nick's {@link Graph} in {@link Graph} form
+	 *
+	 * @return Nick's {@link Graph}
+	 */
 	public static Graph<Coordinate> getGraph() {
 		return parseGraph(getNicksValues());
 	}
