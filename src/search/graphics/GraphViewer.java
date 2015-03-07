@@ -2,7 +2,6 @@ package search.graphics;
 
 import ilist.IList;
 import search.Coordinate;
-import search.graph.Graph;
 import search.graph.Node;
 
 import javax.swing.JFrame;
