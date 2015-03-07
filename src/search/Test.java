@@ -28,19 +28,19 @@ public class Test {
 
 		Maybe<IList<Node<Coordinate>>> bf = BreadthFirst.findPathFrom(start, inaccessable);
 		Maybe<IList<Node<Coordinate>>> df = DepthFirst.findPathFrom(start, inaccessable);
-		Maybe<IList<Node<Coordinate>>> as = AStar.findPathFrom(start, inaccessable, SearchFunction.manhattan, SearchFunction.euclidean);
+		Maybe<IList<Node<Coordinate>>> as = AStar.findPathFrom(start, inaccessable, SearchFunction.euclidean, SearchFunction.manhattan);
 		System.out.println(bf + "\n" + df + "\n" + as);
 
-		//GraphViewer.traversePath(as.fromMaybe(), 350);
+		// GraphViewer.traversePath(as.fromMaybe(), 350);
 	}
 
 	@SuppressWarnings("unused")
 	private static Node<Coordinate> getTestGraph() {
-		Node<Coordinate> n1 = new Node<Coordinate>(new Coordinate(0, 0));	//         0,0
-		Node<Coordinate> n2 = new Node<Coordinate>(new Coordinate(1, 1));	//       /     \
-		Node<Coordinate> n3 = new Node<Coordinate>(new Coordinate(1, 2));	//    1,1       1,2
-		Node<Coordinate> n4 = new Node<Coordinate>(new Coordinate(2, 3));	//   /   \     /   \
-		Node<Coordinate> n5 = new Node<Coordinate>(new Coordinate(2, 4));	// 2,3  2,4   2,6  2,7
+		Node<Coordinate> n1 = new Node<Coordinate>(new Coordinate(0, 0));	// 0,0
+		Node<Coordinate> n2 = new Node<Coordinate>(new Coordinate(1, 1));	// / \
+		Node<Coordinate> n3 = new Node<Coordinate>(new Coordinate(1, 2));	// 1,1 1,2
+		Node<Coordinate> n4 = new Node<Coordinate>(new Coordinate(2, 3));	// / \ / \
+		Node<Coordinate> n5 = new Node<Coordinate>(new Coordinate(2, 4));	// 2,3 2,4 2,6 2,7
 		Node<Coordinate> n6 = new Node<Coordinate>(new Coordinate(2, 6));
 		Node<Coordinate> n7 = new Node<Coordinate>(new Coordinate(2, 7));
 

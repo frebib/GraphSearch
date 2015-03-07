@@ -13,11 +13,11 @@ public interface SearchFunction<A> extends Function2<Node<A>, Node<A>, Float> {
 	/**
 	 * A {@link SearchFunction} that calculates a Euclidean distance between two {@link Node}{@code s}
 	 */
-	public static final SearchFunction<Coordinate> euclidean = (a, b) -> (float) Math.abs(a.contents.x - b.contents.x) + Math.abs(a.contents.y - b.contents.y);
+	public static final SearchFunction<Coordinate> euclidean = (a, b) -> (float) Math.sqrt(Math.pow(a.contents.x - b.contents.x, 2) + Math.pow(a.contents.y - b.contents.y, 2));
 	/**
 	 * A {@link SearchFunction} that calculates a Manhattan distance between two {@link Node}{@code s}
 	 */
-	public static final SearchFunction<Coordinate> manhattan = (a, b) -> (float) Math.sqrt(Math.pow(a.contents.x - b.contents.x, 2) + Math.pow(a.contents.y - b.contents.y, 2));
+	public static final SearchFunction<Coordinate> manhattan = (a, b) -> (float) Math.abs(a.contents.x - b.contents.x) + Math.abs(a.contents.y - b.contents.y);
 
 	@Override
 	public Float apply(Node<A> a, Node<A> b);
