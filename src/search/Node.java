@@ -1,4 +1,4 @@
-package search.graph;
+package search;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;

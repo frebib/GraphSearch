@@ -1,9 +1,8 @@
 package search;
 
-import ilist.IList;
-import maybe.Maybe;
 import search.datastructures.SearchStack;
-import search.graph.Node;
+
+import java.util.List;
 
 /**
  * Searches a Node collection using Depth-First search
@@ -19,7 +18,7 @@ public class DepthFirst {
 	 * @param goal The {@link search.graph.Node} to searching for
 	 * @return {@link maybe.Maybe} a {@link search.graph.Node} from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
-	public static <A> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal) {
+	public static <A> Node<A> findNodeFrom(Node<A> start, Node<A> goal) {
 		SearchFunction<A> nothing = (a, b) -> 0f;
 		return Search.findNodeFrom(start, goal, new SearchStack<Node<A>>(), nothing, nothing);
 	}
@@ -30,7 +29,7 @@ public class DepthFirst {
 	 * @param goal The {@link search.graph.Node} to searching for
 	 * @return {@link maybe.Maybe} a Path from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
-	public static <A> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal) {
+	public static <A> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal) {
 		SearchFunction<A> nothing = (a, b) -> 0f;
 		return Search.findPathFrom(start, goal, new SearchStack<Node<A>>(), nothing, nothing);
 	}

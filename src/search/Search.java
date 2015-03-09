@@ -1,16 +1,12 @@
 package search;
 
-import ilist.Cons;
-import ilist.IList;
-import ilist.Nil;
-import maybe.Just;
-import maybe.Maybe;
-import maybe.Nothing;
+import rp.util.Collections;
 import search.datastructures.DataStructure;
-import search.graph.Node;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,12 +29,12 @@ public class Search {
 	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.graph.Node}
 	 * @return {@link maybe.Maybe} a {@link search.graph.Node} from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
-	public static <A, B extends DataStructure<Node<A>>> Maybe<Node<A>> findNodeFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
+	public static <A, B extends DataStructure<Node<A>>> Node<A> findNodeFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
 		Set<Node<A>> visited = new HashSet<Node<A>>();
 		Node<A> node = null;
 
 		if (start.contentsEquals(goal.contents))
-			return new Nothing<>();
+			return null;
 
 		start.setHeuristic(heuristic.apply(start, goal));
 		start.setCost(0);
@@ -47,7 +43,7 @@ public class Search {
 		while (!frontier.isEmpty()) {
 			node = frontier.getHead();				// Get and remove the first element in the manner specified by the data structure
 			if (node.contentsEquals(goal.contents))
-				return new Just<Node<A>>(node);		// Return found goal Node
+				return node;						// Return found goal Node
 			else
 				for (Node<A> suc : node.getSuccessors())
 					if (!visited.contains(suc)) {
@@ -59,7 +55,7 @@ public class Search {
 						visited.add(suc);				// be searched on a later iteration of this while loop
 					}
 		}
-		return new Nothing<>();
+		return null;
 	}
 	/**
 	 * Finds a path between connected {@link search.graph.Node}{@code s}
@@ -71,12 +67,12 @@ public class Search {
 	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.graph.Node}
 	 * @return {@link maybe.Maybe} a Path from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
-	public static <A, B extends DataStructure<Node<A>>> Maybe<IList<Node<A>>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
+	public static <A, B extends DataStructure<Node<A>>> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
 		Map<Node<A>, Node<A>> visited = new LinkedHashMap<Node<A>, Node<A>>();
 		Node<A> node = null;
 
 		if (start.contentsEquals(goal.contents))
-			return new Nothing<>();
+			return null;
 
 		start.setHeuristic(heuristic.apply(start, goal));
 		start.setCost(0);
@@ -87,14 +83,15 @@ public class Search {
 			if (node.contentsEquals(goal.contents)) {	// At this point we reconstruct the path followed from the visited Map
 				visited.put(start, null);				// Add start Node as it will be first element in list (last one to be added)
 
-				IList<Node<A>> list = new Nil<>();
+				ArrayList<Node<A>> list = new ArrayList<Node<A>>();
 				while (node != null) {					// Iterate through the nodes in the visited map
-					list = new Cons<>(node, list);		// Add the current node to the resulting path
+					list.add(node);						// Add the current node to the resulting path
 					node = visited.get(node);			// Get the parent of the node from the Key-Value
 				}										// pair in the Map using the node as the key
 
 				assert (list.size() > 1);				// It should never be that the only node in the list
-				return new Just<>(list);				// is the start node; that should catch at the start.
+				Collections.reverse(list);				// is the start node; that should catch at the start.
+				return list;
 			}
 			else
 				for (Node<A> suc : node.getSuccessors())
@@ -107,6 +104,6 @@ public class Search {
 						visited.put(suc, node);				// Set the node as visited
 					}
 		}
-		return new Nothing<>();
+		return null;
 	}
 }
