@@ -22,16 +22,15 @@ public class SearchPriorityQueue<A> extends ArrayList<A> implements DataStructur
 	public A getHead() {
 		if (isEmpty())
 			return null;
-		return get(0);
+		A head = get(0);
+		remove(0);
+		return head;
 	}
 
 	@Override
 	public boolean add(A a) {
-		System.out.println("Added: " + a);
 		super.add(a);
-		System.out.println("Sort started");
 		Collections.sort(this, comparer);
-		System.out.println("Sort finished");
 		return true;
 	}
 }
