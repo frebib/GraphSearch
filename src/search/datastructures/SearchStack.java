@@ -1,6 +1,6 @@
 package search.datastructures;
 
-import java.util.ArrayDeque;
+import java.util.Stack;
 
 /**
  * Stores a {@code Collection} of items in a Stack {@link search.datastructures.DataStructure} The implementation actually uses a {@link java.util.ArrayDeque} in place of a {@link java.util.Stack}
@@ -8,10 +8,7 @@ import java.util.ArrayDeque;
  * @author Jack Hair
  * @param <A> @inheritDoc
  */
-public class SearchStack<A> extends ArrayDeque<A> implements DataStructure<A> {
-
-	private static final long serialVersionUID = -1396748782494268710L;
-
+public class SearchStack<A> extends Stack<A> implements DataStructure<A> {
 	@Override
 	public A getHead() {
 		return pop();
@@ -23,4 +20,11 @@ public class SearchStack<A> extends ArrayDeque<A> implements DataStructure<A> {
 		return true;
 	}
 
+	@Override
+	public boolean contains(A a) {
+		for (Object element : elementData)
+			if (a.equals(element))
+				return true;
+		return false;
+	}
 }

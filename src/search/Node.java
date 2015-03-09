@@ -1,7 +1,7 @@
 package search;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 
 /**
  * Represents a Node that carries a contents and it's successors
@@ -25,7 +25,7 @@ public class Node<A> {
 	 */
 	public Node(A contents) {
 		this.contents = contents;
-		this.successors = new LinkedHashSet<Node<A>>();
+		this.successors = new ArrayList<Node<A>>();
 	}
 
 	/**
@@ -98,6 +98,6 @@ public class Node<A> {
 
 	@Override
 	public String toString() {
-		return "Node" + contents.toString();
+		return "Node " + contents.toString();
 	}
 }

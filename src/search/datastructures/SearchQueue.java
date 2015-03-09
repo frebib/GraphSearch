@@ -1,6 +1,6 @@
 package search.datastructures;
 
-import java.util.ArrayDeque;
+import java.util.Queue;
 
 /**
  * Stores a {@code Collection} of items in a Queue {@link search.datastructures.DataStructure}
@@ -8,11 +8,24 @@ import java.util.ArrayDeque;
  * @author Jack Hair
  * @param <A> @inheritDoc
  */
-public class SearchQueue<A> extends ArrayDeque<A> implements DataStructure<A> {
-	private static final long serialVersionUID = -3176829228207481830L;
-
+public class SearchQueue<A> extends Queue<A> implements DataStructure<A> {
+	@SuppressWarnings("unchecked")
 	@Override
 	public A getHead() {
-		return poll();
+		return (A) pop();
+	}
+
+	@Override
+	public boolean add(A a) {
+		addElement(a);
+		return true;
+	}
+
+	@Override
+	public boolean contains(A a) {
+		for (Object element : elementData)
+			if (a.equals(element))
+				return true;
+		return false;
 	}
 }

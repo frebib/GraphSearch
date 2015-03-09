@@ -1,7 +1,9 @@
 package search.datastructures;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import rp.util.Collections;
+import rp.util.Comparator;
+
+import java.util.ArrayList;
 
 /**
  * Stores a {@code Collection} of items in a PriorityQueue {@link search.datastructures.DataStructure}
@@ -9,15 +11,27 @@ import java.util.PriorityQueue;
  * @author Jack Hair
  * @param <A> @inheritDoc
  */
-public class SearchPriorityQueue<A> extends PriorityQueue<A> implements DataStructure<A> {
-	private static final long serialVersionUID = 2623101708315097645L;
+public class SearchPriorityQueue<A> extends ArrayList<A> implements DataStructure<A> {
+	private Comparator<A> comparer;
 
 	public SearchPriorityQueue(Comparator<A> comparer) {
-		super(comparer);
+		this.comparer = comparer;
 	}
 
 	@Override
 	public A getHead() {
-		return poll();
+		if (isEmpty())
+			return null;
+		return get(0);
+	}
+
+	@Override
+	public boolean add(A a) {
+		System.out.println("Added: " + a);
+		super.add(a);
+		System.out.println("Sort started");
+		Collections.sort(this, comparer);
+		System.out.println("Sort finished");
+		return true;
 	}
 }

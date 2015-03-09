@@ -4,8 +4,8 @@ import rp.util.Collections;
 import search.datastructures.DataStructure;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +18,7 @@ import java.util.Set;
  * @author Hannah Evans
  */
 
+@SuppressWarnings("deprecation")
 public class Search {
 	/**
 	 * Finds a Node in a {@link search.graph.Graph}
@@ -68,7 +69,7 @@ public class Search {
 	 * @return {@link maybe.Maybe} a Path from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
 	public static <A, B extends DataStructure<Node<A>>> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
-		Map<Node<A>, Node<A>> visited = new LinkedHashMap<Node<A>, Node<A>>();
+		Map<Node<A>, Node<A>> visited = new HashMap<Node<A>, Node<A>>();
 		Node<A> node = null;
 
 		if (start.contentsEquals(goal.contents))
@@ -79,18 +80,24 @@ public class Search {
 		frontier.add(start);
 
 		while (!frontier.isEmpty()) {
+			System.out.println("frontier empty: " + frontier.isEmpty());
+			System.out.println("frontier: " + frontier);
 			node = frontier.getHead();
 			if (node.contentsEquals(goal.contents)) {	// At this point we reconstruct the path followed from the visited Map
 				visited.put(start, null);				// Add start Node as it will be first element in list (last one to be added)
 
 				ArrayList<Node<A>> list = new ArrayList<Node<A>>();
 				while (node != null) {					// Iterate through the nodes in the visited map
+					System.out.println("Building path: " + node);
 					list.add(node);						// Add the current node to the resulting path
 					node = visited.get(node);			// Get the parent of the node from the Key-Value
 				}										// pair in the Map using the node as the key
 
 				assert (list.size() > 1);				// It should never be that the only node in the list
+				System.out.println("Reverse started");
 				Collections.reverse(list);				// is the start node; that should catch at the start.
+				System.out.println("Reverse finished");
+				System.out.println("return list: " + list);
 				return list;
 			}
 			else
@@ -104,6 +111,7 @@ public class Search {
 						visited.put(suc, node);				// Set the node as visited
 					}
 		}
+		System.out.println("return null");
 		return null;
 	}
 }

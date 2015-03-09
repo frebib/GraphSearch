@@ -19,7 +19,12 @@ public class BreadthFirst {
 	 * @return {@link maybe.Maybe} a {@link search.graph.Node} from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
 	public static <A> Node<A> findNodeFrom(Node<A> start, Node<A> goal) {
-		SearchFunction<A> nothing = (a, b) -> 0f;
+		SearchFunction<A> nothing = new SearchFunction<A>() {
+			@Override
+			public float apply(Node<A> a, Node<A> b) {
+				return 0f;
+			}
+		};
 		return Search.findNodeFrom(start, goal, new SearchQueue<Node<A>>(), nothing, nothing);
 	}
 	/**
@@ -30,7 +35,12 @@ public class BreadthFirst {
 	 * @return {@link maybe.Maybe} a Path from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
 	public static <A> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal) {
-		SearchFunction<A> nothing = (a, b) -> 0f;
+		SearchFunction<A> nothing = new SearchFunction<A>() {
+			@Override
+			public float apply(Node<A> a, Node<A> b) {
+				return 0f;
+			}
+		};
 		return Search.findPathFrom(start, goal, new SearchQueue<Node<A>>(), nothing, nothing);
 	}
 }

@@ -1,6 +1,6 @@
 package search;
 
-import java.util.Comparator;
+import rp.util.Comparator;
 
 /**
  * Compares two {@link Node}{@code s} according to their f() value
