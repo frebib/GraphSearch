@@ -1,30 +1,43 @@
 package search;
 
-/**
- * Represents a 2D integer Co-ordinate
- *
- * @author Martin Escardo
- */
-
 public class Coordinate {
-	/**
-	 * Represents the X value of the Coordinate
-	 */
-	public int x;
-	/**
-	 * Represents the Y value of the Coordinate
-	 */
-	public int y;
+	public byte x, y;
 
-	/**
-	 * Creates a Coordinate from {@code x} and {@code y} values
-	 *
-	 * @param x The X value
-	 * @param y The Y value
-	 */
-	public Coordinate(int x, int y) {
+	public Coordinate(byte x, byte y) {
 		this.x = x;
 		this.y = y;
+	}
+	public Coordinate(int x, int y) {
+		this.x = (byte) x;
+		this.y = (byte) y;
+	}
+	public Coordinate(float x, float y) {
+		this.x = (byte) x;
+		this.y = (byte) y;
+	}
+	public Coordinate(double x, double y) {
+		this.x = (byte) x;
+		this.y = (byte) y;
+	}
+
+	public byte getX() {
+		return x;
+	}
+
+	public byte getY() {
+		return y;
+	}
+
+	public void setX(byte x) {
+		this.x = x;
+	}
+
+	public void setY(byte y) {
+		this.y = y;
+	}
+
+	public Coordinate getDelta(Coordinate c) {
+		return new Coordinate((byte) (c.x - x), (byte) (c.y - y));
 	}
 
 	@Override

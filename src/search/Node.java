@@ -16,7 +16,7 @@ public class Node<A> {
 	/**
 	 * The Object that the {@link Node} represents
 	 */
-	public final A contents;
+	public final A payload;
 
 	/**
 	 * Creates a new Node with a contents
@@ -24,7 +24,7 @@ public class Node<A> {
 	 * @param contents Object for the Node to represent
 	 */
 	public Node(A contents) {
-		this.contents = contents;
+		this.payload = contents;
 		this.successors = new ArrayList<Node<A>>();
 	}
 
@@ -93,11 +93,11 @@ public class Node<A> {
 	 * @return true if the contents are .equal()
 	 */
 	public boolean contentsEquals(A c) {
-		return contents.equals(c);
+		return payload.equals(c);
 	}
 
 	@Override
 	public String toString() {
-		return "Node " + contents.toString();
+		return "Node " + payload.toString();
 	}
 }
