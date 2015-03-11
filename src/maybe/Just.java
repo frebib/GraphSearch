@@ -12,7 +12,7 @@ public class Just<E> implements Maybe<E> {
 
 	/**
 	 * Creates {@link Just} an Element
-	 * 
+	 *
 	 * @param something An Element to {@link Just} create
 	 */
 	public Just(E something) {

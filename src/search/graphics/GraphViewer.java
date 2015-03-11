@@ -19,19 +19,20 @@ public class GraphViewer {
 	 * @param path Path to Traverse
 	 * @param nodeDelay Time in ms between {@link Node}{@code s} in the Path
 	 */
-	public static void traversePath(IList<Node<Coordinate>> path, int nodeDelay) {
+	public static void traversePath(IList<Node<Coordinate>> path, int nodeDelay, String title) {
 		Traverser traverser = new Traverser();
 		View v = new View(traverser);
 
-		JFrame frame = new JFrame("Graph");
+		JFrame frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(900, 600);
+		frame.setLocationRelativeTo(null);
 		frame.add(v);
 		frame.setVisible(true);
 
 		traverser.runTraversal(path, nodeDelay);
 		try {
-			Thread.sleep(nodeDelay * 2);
+			Thread.sleep(nodeDelay);
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();

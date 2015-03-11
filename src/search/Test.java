@@ -35,7 +35,9 @@ public class Test {
 		System.out.println(bf + "\n" + df);
 		System.out.println(asy + "\n" + asn);
 
-		GraphViewer.traversePath(asy.fromMaybe(), 350);
+		GraphViewer.traversePath(bf.fromMaybe(), 350, "Breadth First Search");
+		GraphViewer.traversePath(df.fromMaybe(), 350, "Depth First Search");
+		GraphViewer.traversePath(asy.fromMaybe(), 350, "A* Search");
 	}
 
 	@SuppressWarnings("unused")
