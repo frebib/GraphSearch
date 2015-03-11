@@ -52,6 +52,7 @@ public class Search {
 				for (Node<A> suc : node.getSuccessors())
 					if (!visited.contains(suc)) {
 						float costVal = node.getCost() + cost.apply(node, suc);
+
 						suc.setHeuristic(heuristic.apply(suc, goal));
 						suc.setCost(costVal);
 
@@ -100,11 +101,13 @@ public class Search {
 				for (Node<A> suc : node.getSuccessors())
 					if (!visited.containsKey(suc)) {
 						float costVal = node.getCost() + cost.apply(node, suc);
-						suc.setHeuristic(heuristic.apply(suc, goal));
-						suc.setCost(costVal);
+						if (!frontier.contains(suc) || costVal < suc.getCost()) {
+							suc.setHeuristic(heuristic.apply(suc, goal));
+							suc.setCost(costVal);
 
-						frontier.add(suc);					// Add successor to frontier to allow it to be searched from
-						visited.put(suc, node);				// Set the node as visited
+							visited.put(suc, node);				// Set the node as visited
+							frontier.add(suc);					// Add successor to frontier to allow it to be searched from
+						}
 					}
 		}
 		return new Nothing<>();

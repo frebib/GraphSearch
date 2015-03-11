@@ -26,6 +26,8 @@ public class Node<A> {
 	public Node(A contents) {
 		this.contents = contents;
 		this.successors = new LinkedHashSet<Node<A>>();
+
+		this.cost = Float.POSITIVE_INFINITY;
 	}
 
 	/**
