@@ -17,8 +17,8 @@ public class Test {
 	@SuppressWarnings("javadoc")
 	public static void main(String[] args) {
 		final Graph<Coordinate> nicksGraph = NicksGraph.getGraph();
-		final Node<Coordinate> start = nicksGraph.nodeWith(new Coordinate(0, 2));
-		final Node<Coordinate> goal = new Node<Coordinate>(new Coordinate(9, 2));
+		final Node<Coordinate> start = nicksGraph.nodeWith(new Coordinate(0, 0));
+		final Node<Coordinate> goal = new Node<Coordinate>(new Coordinate(9, 6));
 		final Node<Coordinate> inaccessable = new Node<Coordinate>(new Coordinate(4, 0));
 
 		// Assert that the findNodeFrom methods work correctly
@@ -27,11 +27,12 @@ public class Test {
 		assert (BreadthFirst.findPathFrom(start, inaccessable).isNothing());
 		assert (DepthFirst.findPathFrom(start, inaccessable).isNothing());
 
-		Maybe<IList<Node<Coordinate>>> bf = BreadthFirst.findPathFrom(start, inaccessable);
-		Maybe<IList<Node<Coordinate>>> df = DepthFirst.findPathFrom(start, inaccessable);
+		Maybe<IList<Node<Coordinate>>> bf = BreadthFirst.findPathFrom(start, goal);
+		Maybe<IList<Node<Coordinate>>> df = DepthFirst.findPathFrom(start, goal);
 
 		Maybe<IList<Node<Coordinate>>> asy = AStar.findPathFrom(start, goal, SearchFunction.euclidean, SearchFunction.manhattan);
 		Maybe<IList<Node<Coordinate>>> asn = AStar.findPathFrom(start, inaccessable, SearchFunction.euclidean, SearchFunction.manhattan);
+		System.out.println(bf + "\n" + df);
 		System.out.println(asy + "\n" + asn);
 
 		GraphViewer.traversePath(asy.fromMaybe(), 350);
