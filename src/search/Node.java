@@ -26,6 +26,8 @@ public class Node<A> {
 	public Node(A contents) {
 		this.payload = contents;
 		this.successors = new ArrayList<Node<A>>();
+
+		this.cost = Float.POSITIVE_INFINITY;
 	}
 
 	/**

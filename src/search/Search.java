@@ -49,6 +49,7 @@ public class Search {
 				for (Node<A> suc : node.getSuccessors())
 					if (!visited.contains(suc)) {
 						float costVal = node.getCost() + cost.apply(node, suc);
+
 						suc.setHeuristic(heuristic.apply(suc, goal));
 						suc.setCost(costVal);
 
@@ -69,7 +70,8 @@ public class Search {
 	 * @return {@link maybe.Maybe} a Path from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
 	public static <A, B extends DataStructure<Node<A>>> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
-		Map<Node<A>, Node<A>> visited = new HashMap<Node<A>, Node<A>>();
+		Map<Node<A>, Node<A>> successors = new HashMap<Node<A>, Node<A>>();
+		Set<Node<A>> visited = new HashSet<>();
 		Node<A> node = null;
 
 		if (start.contentsEquals(goal.payload))
@@ -81,13 +83,14 @@ public class Search {
 
 		while (!frontier.isEmpty()) {
 			node = frontier.getHead();
+			visited.add(node);
 			if (node.contentsEquals(goal.payload)) {	// At this point we reconstruct the path followed from the visited Map
-				visited.put(start, null);				// Add start Node as it will be first element in list (last one to be added)
+				successors.put(start, null);				// Add start Node as it will be first element in list (last one to be added)
 
 				ArrayList<Node<A>> list = new ArrayList<Node<A>>();
 				while (node != null) {					// Iterate through the nodes in the visited map
 					list.add(node);						// Add the current node to the resulting path
-					node = visited.get(node);			// Get the parent of the node from the Key-Value
+					node = successors.get(node);		// Get the parent of the node from the Key-Value
 				}										// pair in the Map using the node as the key
 
 				assert (list.size() > 1);				// It should never be that the only node in the list
@@ -96,13 +99,15 @@ public class Search {
 			}
 			else
 				for (Node<A> suc : node.getSuccessors())
-					if (!visited.containsKey(suc)) {
+					if (!visited.contains(suc)) {
 						float costVal = node.getCost() + cost.apply(node, suc);
-						suc.setHeuristic(heuristic.apply(suc, goal));
-						suc.setCost(costVal);
+						if (!frontier.contains(suc) || costVal < suc.getCost()) {
+							suc.setHeuristic(heuristic.apply(suc, goal));
+							suc.setCost(costVal);
 
-						frontier.add(suc);					// Add successor to frontier to allow it to be searched from
-						visited.put(suc, node);				// Set the node as visited
+							successors.put(suc, node);				// Set the node as visited
+							frontier.add(suc);					// Add successor to frontier to allow it to be searched from
+						}
 					}
 		}
 		return null;
