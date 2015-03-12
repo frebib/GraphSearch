@@ -5,6 +5,11 @@
 bin/
 doc/
 
+# Idea
+.idea
+out/
+GraphSearch.iml
+
 # Misc
 *.pdf
 *.zip
