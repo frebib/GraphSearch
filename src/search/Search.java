@@ -21,14 +21,14 @@ import java.util.Set;
 @SuppressWarnings("deprecation")
 public class Search {
 	/**
-	 * Finds a Node in a {@link search.graph.Graph}
+	 * Finds a Node in a Graph
 	 *
-	 * @param start The {@link search.graph.Node} to start searching from
-	 * @param goal The {@link search.graph.Node} to searching for
-	 * @param frontier A {@link search.DataStructures.DataStructure} to store the frontier set of the {@link Search}
-	 * @param heuristic A Heuristic {@link maybe.Function2} to estimate the distance to the goal {@link search.graph.Node}
-	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.graph.Node}
-	 * @return {@link maybe.Maybe} a {@link search.graph.Node} from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
+	 * @param start The {@link search.Node} to start searching from
+	 * @param goal The {@link search.Node} to searching for
+	 * @param frontier A {@link search.datastructures.DataStructure} to store the frontier set of the {@link Search}
+	 * @param heuristic A Heuristic to estimate the distance to the goal {@link search.Node}
+	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.Node}
+	 * @return A {@link search.Node} from {@link search.Node} {@code start} to {@link search.Node} {@code goal}
 	 */
 	public static <A, B extends DataStructure<Node<A>>> Node<A> findNodeFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
 		Set<Node<A>> visited = new HashSet<Node<A>>();
@@ -60,14 +60,14 @@ public class Search {
 		return null;
 	}
 	/**
-	 * Finds a path between connected {@link search.graph.Node}{@code s}
+	 * Finds a path between connected {@link search.Node}{@code s}
 	 *
-	 * @param start The {@link search.graph.Node} to start path-finding from
-	 * @param goal The {@link search.graph.Node} to searching for
-	 * @param frontier A {@link search.DataStructures.DataStructure} to store the frontier set of the {@link Search}
-	 * @param heuristic A Heuristic {@link maybe.Function2} to estimate the distance to the goal {@link search.graph.Node}
-	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.graph.Node}
-	 * @return {@link maybe.Maybe} a Path from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
+	 * @param start The {@link search.Node} to start path-finding from
+	 * @param goal The {@link search.Node} to searching for
+	 * @param frontier A {@link search.datastructures.DataStructure} to store the frontier set of the {@link Search}
+	 * @param heuristic A Heuristic to estimate the distance to the goal {@link search.Node}
+	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.Node}
+	 * @return A Path from {@link search.Node} {@code start} to {@link search.Node} {@code goal}
 	 */
 	public static <A, B extends DataStructure<Node<A>>> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
 		Map<Node<A>, Node<A>> successors = new HashMap<Node<A>, Node<A>>();
