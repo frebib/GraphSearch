@@ -71,7 +71,7 @@ public class Search {
 	 */
 	public static <A, B extends DataStructure<Node<A>>> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
 		Map<Node<A>, Node<A>> successors = new HashMap<Node<A>, Node<A>>();
-		Set<Node<A>> visited = new HashSet<>();
+		Set<Node<A>> visited = new HashSet<Node<A>>();
 		Node<A> node = null;
 
 		if (start.contentsEquals(goal.payload))
