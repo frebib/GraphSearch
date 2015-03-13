@@ -69,10 +69,13 @@ public class Search {
 	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.Node}
 	 * @return A Path from {@link search.Node} {@code start} to {@link search.Node} {@code goal}
 	 */
-	public static <A, B extends DataStructure<Node<A>>> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost) {
+	public static <A, B extends DataStructure<Node<A>>> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost, SearchProgress prog) {
 		Map<Node<A>, Node<A>> successors = new HashMap<Node<A>, Node<A>>();
 		Set<Node<A>> visited = new HashSet<Node<A>>();
 		Node<A> node = null;
+
+		float startHeuristic, lowestHeuristic;
+		startHeuristic = lowestHeuristic = heuristic.apply(start, goal);
 
 		if (start.contentsEquals(goal.payload))
 			return null;
@@ -102,8 +105,12 @@ public class Search {
 					if (!visited.contains(suc)) {
 						float costVal = node.getCost() + cost.apply(node, suc);
 						if (!frontier.contains(suc) || costVal < suc.getCost()) {
-							suc.setHeuristic(heuristic.apply(suc, goal));
-							suc.setCost(costVal);
+							float h = heuristic.apply(suc, goal);
+							if (h < lowestHeuristic && prog != null) {
+								lowestHeuristic = h;
+								prog.progressMade((float) ((1 - lowestHeuristic / startHeuristic) * 0.95));
+							}
+							suc.setHeuristic(h);
 
 							successors.put(suc, node);				// Set the node as visited
 							frontier.add(suc);					// Add successor to frontier to allow it to be searched from
