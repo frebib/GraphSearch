@@ -57,7 +57,7 @@ public class Coordinate {
 	}
 	@Override
 	public int hashCode() {
-		return x + y << 16;
+		return x + (y << 8);
 	}
 	@Override
 	public String toString() {
