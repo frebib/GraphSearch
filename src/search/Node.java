@@ -36,7 +36,8 @@ public class Node<A> {
 	 * @param s Successor to the {@link Node}
 	 */
 	public void addSuccessor(Node<A> s) {
-		successors.add(s);
+		if (s != null)
+			successors.add(s);
 	}
 	/**
 	 * Gets a {@link Collection} of all successors
