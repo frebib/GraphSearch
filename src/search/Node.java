@@ -16,7 +16,7 @@ public class Node<A> {
 	/**
 	 * The Object that the {@link Node} represents
 	 */
-	public final A payload;
+	private final A payload;
 
 	/**
 	 * Creates a new Node with a contents
@@ -28,6 +28,15 @@ public class Node<A> {
 		this.successors = new ArrayList<Node<A>>();
 
 		this.cost = Float.POSITIVE_INFINITY;
+	}
+
+	/**
+	 * Returns the payload of the node
+	 *
+	 * @return The payload of the node
+	 */
+	public A getPayload() {
+		return payload;
 	}
 
 	/**
