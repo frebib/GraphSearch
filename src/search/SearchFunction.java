@@ -13,7 +13,7 @@ public interface SearchFunction<A> {
 	public static final SearchFunction<Coordinate> euclidean = new SearchFunction<Coordinate>() {
 		@Override
 		public float apply(Node<Coordinate> a, Node<Coordinate> b) {
-			return (float) Math.sqrt(Math.pow(a.payload.x - b.payload.x, 2) + Math.pow(a.payload.y - b.payload.y, 2));
+			return (float) Math.sqrt(Math.pow(a.getPayload().x - b.getPayload().x, 2) + Math.pow(a.getPayload().y - b.getPayload().y, 2));
 		}
 	};
 	/**
@@ -22,7 +22,7 @@ public interface SearchFunction<A> {
 	public static final SearchFunction<Coordinate> manhattan = new SearchFunction<Coordinate>() {
 		@Override
 		public float apply(Node<Coordinate> a, Node<Coordinate> b) {
-			return Math.abs(a.payload.x - b.payload.x) + Math.abs(a.payload.y - b.payload.y);
+			return Math.abs(a.getPayload().x - b.getPayload().x) + Math.abs(a.getPayload().y - b.getPayload().y);
 		}
 	};
 	/**

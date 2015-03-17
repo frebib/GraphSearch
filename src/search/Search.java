@@ -34,7 +34,7 @@ public class Search {
 		Set<Node<A>> visited = new HashSet<Node<A>>();
 		Node<A> node = null;
 
-		if (start.contentsEquals(goal.payload))
+		if (start.contentsEquals(goal.getPayload()))
 			return null;
 
 		start.setHeuristic(heuristic.apply(start, goal));
@@ -43,7 +43,7 @@ public class Search {
 
 		while (!frontier.isEmpty()) {
 			node = frontier.getHead();				// Get and remove the first element in the manner specified by the data structure
-			if (node.contentsEquals(goal.payload))
+			if (node.contentsEquals(goal.getPayload()))
 				return node;						// Return found goal Node
 			else
 				for (Node<A> suc : node.getSuccessors())
@@ -77,7 +77,7 @@ public class Search {
 		float startHeuristic, lowestHeuristic;
 		startHeuristic = lowestHeuristic = heuristic.apply(start, goal);
 
-		if (start.contentsEquals(goal.payload))
+		if (start.contentsEquals(goal.getPayload()))
 			return null;
 
 		start.setHeuristic(heuristic.apply(start, goal));
@@ -87,7 +87,7 @@ public class Search {
 		while (!frontier.isEmpty()) {
 			node = frontier.getHead();
 			visited.add(node);
-			if (node.contentsEquals(goal.payload)) {	// At this point we reconstruct the path followed from the visited Map
+			if (node.contentsEquals(goal.getPayload())) {	// At this point we reconstruct the path followed from the visited Map
 				successors.put(start, null);				// Add start Node as it will be first element in list (last one to be added)
 
 				ArrayList<Node<A>> list = new ArrayList<Node<A>>();
