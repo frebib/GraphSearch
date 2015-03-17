@@ -6,17 +6,16 @@ import java.util.Collection;
 /**
  * Represents a Node that carries a contents and it's successors
  *
- * @author Martin Escardo
  * @param <A> Payload of the {@link Node}
+ * @author Martin Escardo
  */
 public class Node<A> {
 	private final Collection<Node<A>> successors;
-	private float heuristic, cost;
-
 	/**
 	 * The Object that the {@link Node} represents
 	 */
 	private final A payload;
+	private float heuristic, cost;
 
 	/**
 	 * Creates a new Node with a contents
@@ -31,9 +30,9 @@ public class Node<A> {
 	}
 
 	/**
-	 * Returns the payload of the node
+	 * Returns the payload of the {@link Node}
 	 *
-	 * @return The payload of the node
+	 * @return The payload of the {@link Node}
 	 */
 	public A getPayload() {
 		return payload;
@@ -48,6 +47,17 @@ public class Node<A> {
 		if (s != null)
 			successors.add(s);
 	}
+
+	/**
+	 * Removes a successor
+	 *
+	 * @param s Successor to be removed
+	 */
+	public void removeSuccessor(Node<A> s) {
+		if (s != null)
+			successors.remove(s);
+	}
+
 	/**
 	 * Gets a {@link Collection} of all successors
 	 *
@@ -65,22 +75,7 @@ public class Node<A> {
 	public float getCost() {
 		return cost;
 	}
-	/**
-	 * Gets the {@code Heuristic} value for searching
-	 *
-	 * @return The {@code Heuristic} value
-	 */
-	public float getHeuristic() {
-		return heuristic;
-	}
-	/**
-	 * Gets the combined value of {@code cost} and {@code heuristic} values
-	 *
-	 * @return {@code cost} + {@code heuristic}
-	 */
-	public float getF() {
-		return cost + heuristic;
-	}
+
 	/**
 	 * Sets the {@code cost} value
 	 *
@@ -89,6 +84,16 @@ public class Node<A> {
 	public void setCost(float cost) {
 		this.cost = cost;
 	}
+
+	/**
+	 * Gets the {@code Heuristic} value for searching
+	 *
+	 * @return The {@code Heuristic} value
+	 */
+	public float getHeuristic() {
+		return heuristic;
+	}
+
 	/**
 	 * Sets the {@code Heuristic} value
 	 *
@@ -96,6 +101,15 @@ public class Node<A> {
 	 */
 	public void setHeuristic(float heuristic) {
 		this.heuristic = heuristic;
+	}
+
+	/**
+	 * Gets the combined value of {@code cost} and {@code heuristic} values
+	 *
+	 * @return {@code cost} + {@code heuristic}
+	 */
+	public float getF() {
+		return cost + heuristic;
 	}
 
 	/**
