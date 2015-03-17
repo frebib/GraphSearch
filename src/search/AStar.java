@@ -32,7 +32,7 @@ public class AStar {
 	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.graph.Node}
 	 * @return {@link maybe.Maybe} a Path from {@link search.graph.Node} {@code start} to {@link search.graph.Node} {@code goal}
 	 */
-	public static <A> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal, SearchFunction<A> heuristic, SearchFunction<A> cost, SearchProgress prog) {
+	public static <A> List<A> findPathFrom(Node<A> start, Node<A> goal, SearchFunction<A> heuristic, SearchFunction<A> cost, SearchProgress prog) {
 		return Search.findPathFrom(start, goal, new SearchPriorityQueue<Node<A>>(new NodeComparer<A>()), heuristic, cost, prog);
 	}
 }

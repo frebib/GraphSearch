@@ -69,7 +69,7 @@ public class Search {
 	 * @param cost A Cost function to calculate the precise distance from the previous {@link search.Node}
 	 * @return A Path from {@link search.Node} {@code start} to {@link search.Node} {@code goal}
 	 */
-	public static <A, B extends DataStructure<Node<A>>> List<Node<A>> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost, SearchProgress prog) {
+	public static <A, B extends DataStructure<Node<A>>> List<A> findPathFrom(Node<A> start, Node<A> goal, B frontier, SearchFunction<A> heuristic, SearchFunction<A> cost, SearchProgress prog) {
 		Map<Node<A>, Node<A>> successors = new HashMap<Node<A>, Node<A>>();
 		Set<Node<A>> visited = new HashSet<Node<A>>();
 		Node<A> node = null;
@@ -90,9 +90,9 @@ public class Search {
 			if (node.contentsEquals(goal.getPayload())) {	// At this point we reconstruct the path followed from the visited Map
 				successors.put(start, null);				// Add start Node as it will be first element in list (last one to be added)
 
-				ArrayList<Node<A>> list = new ArrayList<Node<A>>();
+				ArrayList<A> list = new ArrayList<A>();
 				while (node != null) {					// Iterate through the nodes in the visited map
-					list.add(node);						// Add the current node to the resulting path
+					list.add(node.getPayload());		// Add the current node to the resulting path
 					node = successors.get(node);		// Get the parent of the node from the Key-Value
 				}										// pair in the Map using the node as the key
 
