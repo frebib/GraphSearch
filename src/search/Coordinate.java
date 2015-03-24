@@ -19,6 +19,10 @@ public class Coordinate {
 		this.x = (byte) x;
 		this.y = (byte) y;
 	}
+	public Coordinate(Coordinate c) {
+		x = c.x;
+		y = c.y;
+	}
 
 	public byte getX() {
 		return x;
@@ -36,8 +40,14 @@ public class Coordinate {
 		this.y = y;
 	}
 
-	public Coordinate getDelta(Coordinate c) {
-		return new Coordinate((byte) (c.x - x), (byte) (c.y - y));
+	public Coordinate add(Coordinate c) {
+		return new Coordinate((byte) (c.x + x), (byte) (c.y + y));
+	}
+	public Coordinate subtract(Coordinate c) {
+		return new Coordinate((byte) (x - c.x), (byte) (y - c.y));
+	}
+	public Coordinate midpoint(Coordinate c) {
+		return new Coordinate(add(subtract(c)));
 	}
 
 	@Override
