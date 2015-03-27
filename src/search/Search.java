@@ -77,9 +77,6 @@ public class Search {
 		float startHeuristic, lowestHeuristic;
 		startHeuristic = lowestHeuristic = heuristic.apply(start, goal);
 
-		if (start.contentsEquals(goal.getPayload()))
-			return null;
-
 		start.setHeuristic(heuristic.apply(start, goal));
 		start.setCost(0);
 		frontier.add(start);
